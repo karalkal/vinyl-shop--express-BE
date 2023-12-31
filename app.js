@@ -37,6 +37,9 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 // Mount apiRouter at the '/api' path.
+app.get("/", (req, res, next) =>
+    res.send("KUR"));
+
 app.use("/api/v1", parentRouter);
 
 // error handlers
