@@ -102,7 +102,6 @@ const deleteUser = (req, res, next) => {
         res.status(StatusCodes.NO_CONTENT).send()
     })
 }
-
 const updateUser = async (req, res, next) => {
     const { userId } = req.params
     // middleware creates req.user
@@ -111,6 +110,9 @@ const updateUser = async (req, res, next) => {
         return next(createCustomError('Only logged in user and admins can update this profile', StatusCodes.BAD_REQUEST));
     }
     const updatedUserData = req.body;
+    // Overwrite is_admin: make sure users cannot update themselves with is_admin: true. These can be edited directly from DB only!
+    updatedUserData.is_admin = req.user.is_admin
+    updatedUserData.is_contributor = req.user.is_contributor
 
     const undefinedProperty = verifyNonNullableFields("db_user", updatedUserData);
     if (undefinedProperty) {
