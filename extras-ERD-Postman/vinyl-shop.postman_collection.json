@@ -1,0 +1,1267 @@
+{
+	"info": {
+		"_postman_id": "6fd731a7-c809-4178-a90f-16d3eefbaca2",
+		"name": "vinyl-shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "REGISTER user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"f_name\": \"bbbb\",\n\t\"l_name\": \"bbbb\",\n\t\"email\": \"bb@bb.bb\",\n\t\"password\": \"bbbb\",\n\t\"house_number\": 22,\n\t\"street_name\":  \"Big street\",\n\t\"city\": \"London\",\n\t\"country\": \"France\",\n\t\"is_admin\": false,\n\t\"is_contributor\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"aa@aa.aa\",\n\t\"password\": \"aaaa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "albums",
+			"item": [
+				{
+					"name": "GET all ALBUMS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/albums",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALBUM by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/albums/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"albums",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST ALBUM",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"name\": \"Chaosphere\",\n        \"band_name\": \"Meshuggah\",\n        \"cover\": \"https://upload.wikimedia.org/wikipedia/en/f/f0/Meshuggah-Chaosphere.jpg?20131010215216\",\n        \"release_year\": 1997,\n        \"colour\": \"black\",\n        \"price\": 33.33, \n        \"quantity\": 8,\n        \"label_name\": \"Nuclear Blast\"\n     }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/albums",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE ALBUM by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMjg2NDQ0MCwiZXhwIjoxNzAyOTUwODQwfQ.2DS6ktYu178BkllX8c3W9m7k7wL1mwO56-Wy-KeY90o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/albums/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"albums",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE ALBUM by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzE2OTc5OSwiZXhwIjoxNzAzMjU2MTk5fQ.nJ-12nf-Y9bab6w3KULVKMAANr9BXwrAALjjZa72Msg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Mort\",\n        \"band_name\": \"Blut Aus Nord\",\n        \"cover\": \"https://www.metal-archives.com/images/1/3/3/4/133408.jpg?5003\",\n        \"release_year\": 1996,\n        \"colour\": \"black\",\n        \"price\": 31,\n        \"quantity\": 8,\n        \"label_name\": \"Candlelight Records\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/albums/29",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"albums",
+								"29"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bands",
+			"item": [
+				{
+					"name": "GET all BANDS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/bands",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET band and related ALBUMS array",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/bands/19",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bands",
+								"19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST BAND",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{       \n\"name\": \"Slayer\", \"country\":\t\"Ireland\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/bands",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE BAND",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \"name\": \"Slayer\",\n        \"country\": \"USA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/bands/16",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bands",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE BAND",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMjc3ODg2NywiZXhwIjoxNzAyODY1MjY3fQ.kxRxeBVbuRuJtW79gAe0rG35RU9Y5EAjOfXDdMxHCf0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/bands/17",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bands",
+								"17"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "join genre/album",
+			"item": [
+				{
+					"name": "GET all GENRE/ALBUM (join table)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMjc3ODg2NywiZXhwIjoxNzAyODY1MjY3fQ.kxRxeBVbuRuJtW79gAe0rG35RU9Y5EAjOfXDdMxHCf0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/join_genres_albums",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"join_genres_albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET single GENRE/ALBUM (join table)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMjc3ODg2NywiZXhwIjoxNzAyODY1MjY3fQ.kxRxeBVbuRuJtW79gAe0rG35RU9Y5EAjOfXDdMxHCf0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/join_genres_albums/1/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"join_genres_albums",
+								"1",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST GENRE/ALBUM relation (join table)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n\"albumId\": 1, \"genreId\": 5\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/join_genres_albums",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"join_genres_albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE GENRE/ALBUM (join table)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMjc3ODg2NywiZXhwIjoxNzAyODY1MjY3fQ.kxRxeBVbuRuJtW79gAe0rG35RU9Y5EAjOfXDdMxHCf0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/join_genres_albums/1/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"join_genres_albums",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "genres",
+			"item": [
+				{
+					"name": "GET all GENRES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/genres",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET GENRE and related ALBUMS array",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/genres/10",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"genres",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST GENRE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \"name\": \"Crust Punk\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/genres",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE GENRE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMjc3ODg2NywiZXhwIjoxNzAyODY1MjY3fQ.kxRxeBVbuRuJtW79gAe0rG35RU9Y5EAjOfXDdMxHCf0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \"name\": \"Crust Punk\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/genres/8",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"genres",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE genre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMjc3ODg2NywiZXhwIjoxNzAyODY1MjY3fQ.kxRxeBVbuRuJtW79gAe0rG35RU9Y5EAjOfXDdMxHCf0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/genres/10",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"genres",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "labels",
+			"item": [
+				{
+					"name": "GET all LABELS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/labels",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"labels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET LABEL and related ALBUMS array",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/labels/4",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"labels",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST LABEL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{       \n     \"name\": \"Warner Music Group\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/labels",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"labels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE LABEL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzE3Mzc5OCwiZXhwIjoxNzAzMjYwMTk4fQ.gnkEJdnWymTGPDKkl22Fl-X7ICIyYwHGqPcQVb8gVwY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \"name\": \"Sub Pop\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/labels/10",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"labels",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE LABEL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzE3Mzc5OCwiZXhwIjoxNzAzMjYwMTk4fQ.gnkEJdnWymTGPDKkl22Fl-X7ICIyYwHGqPcQVb8gVwY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/labels/10",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"labels",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "GET all USERS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzk5NjIzMSwiZXhwIjoxNzA0MDgyNjMxfQ.0Id85ll-YZZKA3cIvV2sc7Vp8Aesttx1bdXX09MfuSM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET USER by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6NiwiZW1haWwiOiJkZEBkZC5kZCIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6ZmFsc2V9LCJpYXQiOjE3MDM0MzkzMjksImV4cCI6MTcwMzUyNTcyOX0.zRb1KQp8fzqzbsEK3j0U0JIpi5-RMQ1E8YptY971UCg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzE3Mzc5OCwiZXhwIjoxNzAzMjYwMTk4fQ.gnkEJdnWymTGPDKkl22Fl-X7ICIyYwHGqPcQVb8gVwY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"f_name\": \"gggg\",\n\t\"l_name\": \"gggg\",\n\t\"email\": \"ff@ff.ff\",\n\t\"password\": \"gggg\",\n\t\"house_number\": 55,\n\t\"street_name\":  \"Big street\",\n\t\"city\": \"London\",\n\t\"country\": \"France\",\n\t\"is_admin\": true,\n\t\"is_contributor\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzE3Mzc5OCwiZXhwIjoxNzAzMjYwMTk4fQ.gnkEJdnWymTGPDKkl22Fl-X7ICIyYwHGqPcQVb8gVwY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"f_name\": \"dddd\",\n    \"l_name\": \"dddd\",\n    \"email\": \"dd@dd.dd\",\n    \"password\": \"dddd\",\n    \"house_number\": 44,\n    \"street_name\": \"UPDATED\",\n    \"city\": \"London\",\n    \"country\": \"France\",\n    \"is_admin\": false,\n    \"is_contributor\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMjg2OTc3NCwiZXhwIjoxNzAyOTU2MTc0fQ.NtJAEnvROoXSavJBY5gdOg0GdmX_myHzSCmXaxVIZig",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/9",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "carts",
+			"item": [
+				{
+					"name": "GET cart by USER ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/cart/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cart",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD item to cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzQzNDg0NSwiZXhwIjoxNzAzNTIxMjQ1fQ.6VNdMx179xcuSp1QG_YtfMs0frzzoZZoGG6tdSI-ZKg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart_no\": 2, \n    \"album_id\": 13,\n    \"user_id\": 6\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/cart/add",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REMOVE item from cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6NiwiZW1haWwiOiJkZEBkZC5kZCIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6ZmFsc2V9LCJpYXQiOjE3MDM0MzkzMjksImV4cCI6MTcwMzUyNTcyOX0.zRb1KQp8fzqzbsEK3j0U0JIpi5-RMQ1E8YptY971UCg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 53, \n    \"user_id\": 6\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/cart/remove",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cart",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EMPTY cart BY cart_no and user_id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzQzNDg0NSwiZXhwIjoxNzAzNTIxMjQ1fQ.6VNdMx179xcuSp1QG_YtfMs0frzzoZZoGG6tdSI-ZKg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart_no\": 1, \n    \"user_id\": 6\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/cart",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "GET all ORDERS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/orders/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET single order by USER and ORDER IDs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzYzNDM4NiwiZXhwIjoxNzAzNzIwNzg2fQ.t4_e8FYElH_ZNRxmZN-fDUDdetSoH0ittFrc0_KnTvY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/orders/1/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST ORDER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzYzNDM4NiwiZXhwIjoxNzAzNzIwNzg2fQ.t4_e8FYElH_ZNRxmZN-fDUDdetSoH0ittFrc0_KnTvY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart_no\": 2,\n    \"user_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/orders",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE ORDER(fulfilled timestamp or false)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzYzNDM4NiwiZXhwIjoxNzAzNzIwNzg2fQ.t4_e8FYElH_ZNRxmZN-fDUDdetSoH0ittFrc0_KnTvY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"id\": 2,\n    \"fulfilled_on\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/orders/4",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE ORDER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzYzNDM4NiwiZXhwIjoxNzAzNzIwNzg2fQ.t4_e8FYElH_ZNRxmZN-fDUDdetSoH0ittFrc0_KnTvY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/orders/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "DEV_URL",
+			"value": "http://localhost:3000/api/v1",
+			"type": "default"
+		},
+		{
+			"key": "URL",
+			"value": "https://vynyl-shop.onrender.com/api/v1",
+			"type": "default"
+		}
+	]
+}
