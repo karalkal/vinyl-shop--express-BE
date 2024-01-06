@@ -20,7 +20,6 @@ require('dotenv').config()
 const parentRouter = require('./routers/parentRouter');
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
-const YAML = require('yamljs');
 
 const PORT = process.env.PORT || 3000;
 
@@ -44,7 +43,7 @@ app.use(bodyParser.json());
 
 // at '/' get documentation
 app.get('/', (req, res) => {
-    res.send(<a href="/api-docs"> <h1>vinyl shop documentation</h1> </a>)
+    res.send('<a href="/api-docs"> <h1>vinyl shop documentation</h1> </a>')
 })
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
