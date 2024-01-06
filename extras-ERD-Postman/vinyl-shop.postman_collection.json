@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6fd731a7-c809-4178-a90f-16d3eefbaca2",
+		"_postman_id": "2f918e67-1eae-4396-bca8-301f06d107c4",
 		"name": "vinyl-shop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"f_name\": \"bbbb\",\n\t\"l_name\": \"bbbb\",\n\t\"email\": \"bb@bb.bb\",\n\t\"password\": \"bbbb\",\n\t\"house_number\": 22,\n\t\"street_name\":  \"Big street\",\n\t\"city\": \"London\",\n\t\"country\": \"France\",\n\t\"is_admin\": false,\n\t\"is_contributor\": true\n}",
+							"raw": "{\n\t\"f_name\": \"eeee\",\n\t\"l_name\": \"eeee\",\n\t\"email\": \"ee@ee.ee\",\n\t\"password\": \"eeee\",\n\t\"house_number\": 55,\n\t\"street_name\":  \"Big street\",\n\t\"city\": \"London\",\n\t\"country\": \"France\",\n\t\"is_admin\": true,\n\t\"is_contributor\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -42,7 +42,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"aa@aa.aa\",\n\t\"password\": \"aaaa\"\n}",
+							"raw": "{\n\t\"email\": \"bb@bb.bb\",\n\t\"password\": \"bbbb\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -110,7 +110,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzE3Mzc5OCwiZXhwIjoxNzAzMjYwMTk4fQ.gnkEJdnWymTGPDKkl22Fl-X7ICIyYwHGqPcQVb8gVwY",
 									"type": "string"
 								}
 							]
@@ -119,7 +119,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"name\": \"Chaosphere\",\n        \"band_name\": \"Meshuggah\",\n        \"cover\": \"https://upload.wikimedia.org/wikipedia/en/f/f0/Meshuggah-Chaosphere.jpg?20131010215216\",\n        \"release_year\": 1997,\n        \"colour\": \"black\",\n        \"price\": 33.33, \n        \"quantity\": 8,\n        \"label_name\": \"Nuclear Blast\"\n     }",
+							"raw": "{\n        \"name\": \"to delete\",\n        \"band_name\": \"The Pogues\",\n        \"cover\": \"to delete\",\n        \"release_year\": 1991,\n        \"colour\": \"black\",\n        \"price\": 22,\n        \"quantity\": 1,\n        \"label_name\": \"Warner Music Group\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -260,7 +260,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzE3MzUzNiwiZXhwIjoxNzAzMjU5OTM2fQ.9O73mghodPMwSeQ28NeMB79ZCVHH1Iv84lhvOX_DmvU",
 									"type": "string"
 								}
 							]
@@ -269,7 +269,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{       \n\"name\": \"Slayer\", \"country\":\t\"Ireland\"\n}",
+							"raw": "{        \"name\": \"The Pogues\",\n        \"country\": \"Ireland\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -296,7 +296,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzE3MzUzNiwiZXhwIjoxNzAzMjU5OTM2fQ.9O73mghodPMwSeQ28NeMB79ZCVHH1Iv84lhvOX_DmvU",
 									"type": "string"
 								}
 							]
@@ -305,7 +305,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{        \"name\": \"Slayer\",\n        \"country\": \"USA\"\n}",
+							"raw": "{        \"name\": \"Evoken\",\n        \"country\": \"USA\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -313,13 +313,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/bands/16",
+							"raw": "{{URL}}/bands/17",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"bands",
-								"16"
+								"17"
 							]
 						}
 					},
@@ -422,7 +422,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMjc3ODg2NywiZXhwIjoxNzAyODY1MjY3fQ.kxRxeBVbuRuJtW79gAe0rG35RU9Y5EAjOfXDdMxHCf0",
 									"type": "string"
 								}
 							]
@@ -527,7 +527,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMjc3ODg2NywiZXhwIjoxNzAyODY1MjY3fQ.kxRxeBVbuRuJtW79gAe0rG35RU9Y5EAjOfXDdMxHCf0",
 									"type": "string"
 								}
 							]
@@ -536,7 +536,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{        \"name\": \"Crust Punk\"\n}",
+							"raw": "{        \"name\": \"Punk\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -668,7 +668,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzE2OTc5OSwiZXhwIjoxNzAzMjU2MTk5fQ.nJ-12nf-Y9bab6w3KULVKMAANr9BXwrAALjjZa72Msg",
 									"type": "string"
 								}
 							]
@@ -774,7 +774,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzk5NjIzMSwiZXhwIjoxNzA0MDgyNjMxfQ.0Id85ll-YZZKA3cIvV2sc7Vp8Aesttx1bdXX09MfuSM",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzYzNDM4NiwiZXhwIjoxNzAzNzIwNzg2fQ.t4_e8FYElH_ZNRxmZN-fDUDdetSoH0ittFrc0_KnTvY",
 									"type": "string"
 								}
 							]
@@ -802,7 +802,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6NiwiZW1haWwiOiJkZEBkZC5kZCIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6ZmFsc2V9LCJpYXQiOjE3MDM0MzkzMjksImV4cCI6MTcwMzUyNTcyOX0.zRb1KQp8fzqzbsEK3j0U0JIpi5-RMQ1E8YptY971UCg",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MiwiZW1haWwiOiJiYkBiYi5iYiIsImlzX2NvbnRyaWJ1dG9yIjpmYWxzZSwiaXNfYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzA0NDg5ODMzLCJleHAiOjE3MDQ1NzYyMzN9.kcvgGy_lg_WjZbaDW4InRtsjlllf0eK2MzbGgQYov1M",
 									"type": "string"
 								}
 							]
@@ -810,13 +810,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/users/1",
+							"raw": "{{URL}}/users/2",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"users",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -866,7 +866,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzE3Mzc5OCwiZXhwIjoxNzAzMjYwMTk4fQ.gnkEJdnWymTGPDKkl22Fl-X7ICIyYwHGqPcQVb8gVwY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MiwiZW1haWwiOiJiYkBiYi5iYiIsImlzX2NvbnRyaWJ1dG9yIjpmYWxzZSwiaXNfYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzA0NDg5ODMzLCJleHAiOjE3MDQ1NzYyMzN9.kcvgGy_lg_WjZbaDW4InRtsjlllf0eK2MzbGgQYov1M",
 									"type": "string"
 								}
 							]
@@ -875,7 +875,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"f_name\": \"dddd\",\n    \"l_name\": \"dddd\",\n    \"email\": \"dd@dd.dd\",\n    \"password\": \"dddd\",\n    \"house_number\": 44,\n    \"street_name\": \"UPDATED\",\n    \"city\": \"London\",\n    \"country\": \"France\",\n    \"is_admin\": false,\n    \"is_contributor\": true\n}",
+							"raw": "{\n    \"f_name\": \"bbbb\",\n    \"l_name\": \"bbbb\",\n    \"email\": \"bb@bb.bb\",\n    \"password\": \"bbbb\",\n    \"house_number\": 22,\n    \"street_name\": \"second street\",\n    \"city\": \"London\",\n    \"country\": \"France\",\n    \"is_admin\": true,\n    \"is_contributor\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -883,13 +883,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/users/6",
+							"raw": "{{URL}}/users/2",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"users",
-								"6"
+								"2"
 							]
 						}
 					},
@@ -936,7 +936,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzYzNDM4NiwiZXhwIjoxNzAzNzIwNzg2fQ.t4_e8FYElH_ZNRxmZN-fDUDdetSoH0ittFrc0_KnTvY",
 									"type": "string"
 								}
 							]
@@ -1079,7 +1079,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzgxODg2OCwiZXhwIjoxNzAzOTA1MjY4fQ.Q8MXQJzZcDrNQ91Z52lbNZPoVqzlQaZtX4BkKtE5iZ4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzYzNDM4NiwiZXhwIjoxNzAzNzIwNzg2fQ.t4_e8FYElH_ZNRxmZN-fDUDdetSoH0ittFrc0_KnTvY",
 									"type": "string"
 								}
 							]
