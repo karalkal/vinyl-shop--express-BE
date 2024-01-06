@@ -8,13 +8,19 @@ const xss = require('xss-clean')
 const rateLimiter = require('express-rate-limit')
 
 const bodyParser = require('body-parser');
-const morgan = require('morgan')
+const morgan = require('morgan')        //logger
+
+// swagger
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load('./swagger.yaml')
 
 require('dotenv').config()
 
 const parentRouter = require('./routers/parentRouter');
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
+const YAML = require('yamljs');
 
 const PORT = process.env.PORT || 3000;
 
@@ -35,6 +41,12 @@ app.use(morgan('dev'));
 
 // bodyParser
 app.use(bodyParser.json());
+
+// at '/' get documentation
+app.get('/', (req, res) => {
+    res.send(<a href="/api-docs"> <h1>vinyl shop documentation</h1> </a>)
+})
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 // Mount apiRouter at the '/api' path.
 app.use("/api/v1", parentRouter);

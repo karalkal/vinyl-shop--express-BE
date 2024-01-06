@@ -50,7 +50,9 @@ pool.query('SELECT id, f_name, l_name, city, country FROM db_user ORDER BY id AS
 ----
 
 ### Swagger documentation created using  [APIMatic](https://www.apimatic.io/)
+---
 
 ### Possible issues (could be resolved at FE level):
 - order could be created with non-existing cart_no, will be empty.
+- can also post order to an user who is NOT related to cart, e.g. user1 adds to cart_no 1 but then post order with this cart_no to user2. User 2 will then have empty array of ordered items but price will still be updated.
 
