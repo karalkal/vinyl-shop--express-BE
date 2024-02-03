@@ -18,23 +18,23 @@
 
 ### Non-express files included in repo
 
-*[DB structure (ERD) and sql scripts](https://github.com/karalkal/vynyl-shop--express-BE/blob/main/extras-ERD-Postman/erd_new.pdf)*
+*[DB structure (ERD) and sql scripts](https://github.com/karalkal/vinyl-shop--express-BE/blob/main/extras-ERD-Postman/erd_new.pdf)*
 
 ---
 
 ### API deployed at
 
-*<https://vynyl-shop.onrender.com/api/v1>*
+*<https://vinyl-shop.onrender.com/api/v1>*
 
 ### Example link
 
-*<https://vynyl-shop.onrender.com/api/v1/bands>*  
+*<https://vinyl-shop.onrender.com/api/v1/bands>*  
 
 ---
 
 ### Swagger documentation at
 
-*<https://vynyl-shop.onrender.com/>*  
+*<https://vinyl-shop.onrender.com/>*  
 *(created using  [APIMatic](https://www.apimatic.io/))*
 
 ---

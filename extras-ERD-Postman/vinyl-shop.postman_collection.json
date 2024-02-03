@@ -1260,7 +1260,7 @@
 		},
 		{
 			"key": "URL",
-			"value": "https://vynyl-shop.onrender.com/api/v1",
+			"value": "https://vinyl-shop.onrender.com/api/v1",
 			"type": "default"
 		}
 	]
