@@ -10,8 +10,9 @@ const { createJWT } = require('../utils-validators/jwt')
 
 // const register = async (req, res, next) => { res.send({ "reg works": true }) }
 const register = async (req, res, next) => {
-  // allow only account creation excluding is_admin and is_contributor,
+  // allow only account creation excluding is_admin and is_contributor props (even if in body these will be excluded from the request),
   // need to manually set up admins in DB - update db_user set is_contributor = true, is_admin = true where id = 1
+  // OR use createUser from Users (protected route)
   const userData = {
     f_name: req.body.f_name,
     l_name: req.body.l_name,
