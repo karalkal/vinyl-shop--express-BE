@@ -24,6 +24,8 @@ const register = async (req, res, next) => {
     country: req.body.country
   }
 
+  console.log(userData)
+
   // Validations
   const undefinedProperty = verifyNonNullableFields("db_user", userData);
   if (undefinedProperty) {

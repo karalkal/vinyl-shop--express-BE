@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS db_user (
 );
 
 -- replace "" values with NULL
+-- N.B. SEE EDIT - house_number is now string
 CREATE function replace_empty_str_with_null() 
 RETURNS trigger as 
 $$ begin 
@@ -36,6 +37,7 @@ return new;
 end;
 $$ language plpgsql;
 
+-- N.B. SEE EDIT - house_number is now string
 CREATE TRIGGER null_instead_of_empty_str before
 UPDATE
 	or

@@ -1,5 +1,4 @@
 -- duration of album must be in format mm:ss, hence string not integer
-
 ALTER TABLE album
 ALTER COLUMN duration
 TYPE VARCHAR(11);
@@ -25,7 +24,50 @@ This group have an almost hellish, ritual worship atmosphere to their music that
 35.88
 );
 
-select *  from album;
+select id, price  from album;
+UPDATE album
+SET price = 44.44
+WHERE id='1';
+
+-- price will be NOT NULL
+ALTER TABLE album ALTER COLUMN price SET NOT NULL;
+
+-- allow house numbers to be strings, e.g. 44a or 2-B
+ALTER TABLE db_user
+ALTER COLUMN house_number
+TYPE text;
+
+-- need to drop and recreate trigger and function too as it checks for 0 to cast to NULL
+DROP TRIGGER null_instead_of_empty_str ON db_user;
+DROP FUNCTION if exists replace_empty_str_with_null;
+
+-- replace "" values with NULL
+CREATE function replace_empty_str_with_null() 
+RETURNS trigger as 
+$$ begin 
+	new.house_number = NULLIF(new.house_number, '');
+	new.street_name = NULLIF(new.street_name, '');
+	new.city = NULLIF(new.city, '');
+	new.country = NULLIF(new.country, '');
+return new;
+end;
+$$ language plpgsql;
+
+CREATE TRIGGER null_instead_of_empty_str before
+UPDATE
+	or
+INSERT
+	ON db_user for each row execute procedure replace_empty_str_with_null();
+
+INSERT into db_user(
+	f_name, l_name, email, password_hash, 
+	house_number, street_name, city, country, 
+	is_admin, is_contributor
+)
+	VALUES(
+		'aaaa', 'aaaa', 'aa@aa.aa', 'aaaa',		
+		'4', 'big street', 'London', 'France',
+		true, true					)
 
 
 

@@ -30,7 +30,7 @@ paths:
                   l_name: eeee
                   email: ee@ee.ee
                   password: eeee
-                  house_number: 55
+                  house_number: 5a
                   street_name: Big street
                   city: London
                   country: France
@@ -41,7 +41,7 @@ paths:
               l_name: eeee
               email: ee@ee.ee
               password: eeee
-              house_number: 55
+            house_number: 5a
               street_name: Big street
               city: London
               country: France
@@ -735,7 +735,7 @@ paths:
                   l_name: gggg
                   email: ff@ff.ff
                   password: gggg
-                  house_number: 55
+                house_number: 5a
                   street_name: Big street
                   city: London
                   country: France
@@ -746,7 +746,7 @@ paths:
               l_name: gggg
               email: ff@ff.ff
               password: gggg
-              house_number: 55
+            house_number: 5a
               street_name: Big street
               city: London
               country: France
@@ -1150,7 +1150,7 @@ components:
         l_name: eeee
         email: ee@ee.ee
         password: eeee
-        house_number: 55
+      house_number: 5a
         street_name: Big street
         city: London
         country: France
@@ -1377,7 +1377,7 @@ components:
         l_name: gggg
         email: ff@ff.ff
         password: gggg
-        house_number: 55
+      house_number: 5a
         street_name: Big street
         city: London
         country: France
