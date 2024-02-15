@@ -48,11 +48,11 @@ const createUser = async (req, res, next) => {
     if (passTooShort) {
         return next(createCustomError(`Password must be between 4 and 35 chars`, StatusCodes.BAD_REQUEST));
     }
-    const f_nameTooShort = stringLengthValidator(userData.f_name, 3, 44)  // min, max
+    const f_nameTooShort = stringLengthValidator(userData.f_name, 1, 44)  // min, max
     if (f_nameTooShort) {
         return next(createCustomError(`First Name must be between 3 and 44 chars`, StatusCodes.BAD_REQUEST));
     }
-    const l_nameTooShort = stringLengthValidator(userData.l_name, 3, 44)  // min, max
+    const l_nameTooShort = stringLengthValidator(userData.l_name, 1, 44)  // min, max
     if (l_nameTooShort) {
         return next(createCustomError(`Last Name must be between 3 and 44 chars`, StatusCodes.BAD_REQUEST));
     }

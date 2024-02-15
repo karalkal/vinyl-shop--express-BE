@@ -59,6 +59,8 @@ UPDATE
 INSERT
 	ON db_user for each row execute procedure replace_empty_str_with_null();
 
+
+-- NOTE: PASSWORD IS UNENCRYPTED! THIS IS ONLY A TEST!
 INSERT into db_user(
 	f_name, l_name, email, password_hash, 
 	house_number, street_name, city, country, 
@@ -67,7 +69,7 @@ INSERT into db_user(
 	VALUES(
 		'aaaa', 'aaaa', 'aa@aa.aa', 'aaaa',		
 		'4', 'big street', 'London', 'France',
-		true, true					)
+		false, false					)
 
 
 
