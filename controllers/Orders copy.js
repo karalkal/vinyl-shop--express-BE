@@ -18,7 +18,6 @@ const getAllOrders = (req, res, next) => {
     })
 }
 
-
 const getOrdersByUserAndOrderId = (req, res, next) => {
     // middleware creates req.user
     const { userId, orderId } = req.params
@@ -53,23 +52,20 @@ const getOrdersByUserAndOrderId = (req, res, next) => {
 }
 
 const createOrder = async (req, res, next) => {
-    console.log(req.body.userEmail, req.user.email);
     // First check if the user is creating order for themselves - you cannot allow user 1 to create order for user 2
     // only admins and the user themselves can access this route- middleware creates req.user
     // NB - Here userId is not param but is within body
-    if (req.body.userEmail !== req.user.email && !req.user.is_admin) {
+    if (Number(req.body.user_id) !== req.user.userId && !req.user.is_admin) {
         return next(createCustomError('You cannot create orders for other users, obviously', StatusCodes.BAD_REQUEST));
     }
 
-    const orderData = {
-        total: req.body.totalFromFE,
-        user_id: req.user.userId
-    }
+    const orderData = req.body
     // Validations
-    const undefinedProperty = verifyNonNullableFields("purchase", orderData);
+    const undefinedProperty = verifyNonNullableFields("order", orderData);
     if (undefinedProperty) {
         return next(createCustomError(`Cannot create: essential data missing - ${undefinedProperty}`, StatusCodes.BAD_REQUEST));
     }
+
     const insertQuery = createInsertQuery("purchase", orderData)
 
     pool.query(insertQuery, (error, results) => {
@@ -78,21 +74,12 @@ const createOrder = async (req, res, next) => {
         }
         // Not sure if we can get any different but just in case -> rowCount: 1 if item is notFound, otherwise 0
         if (results.rowCount && results.rowCount !== 1) {
-            return next(createCustomError(`Could not create user`, StatusCodes.BAD_REQUEST))
+            return next(createCustomError(`Could not create order`, StatusCodes.BAD_REQUEST))
         }
         // If all is good
-        const purchaseId = results.rows[0].id
-        createAlbumOrderEntry(purchaseId, req.body)
-
+        console.log(results.rows)
         res.status(StatusCodes.CREATED).json(results.rows)
     })
-}
-
-function createAlbumOrderEntry(purchaseId, albums) {
-    // for (let album of albums) {
-        console.log(purchaseId, albums)
-        // const insertQuery = createInsertQuery("album_order", purchaseId, album)
-    }
 }
 
 const deleteOrder = (req, res, next) => {

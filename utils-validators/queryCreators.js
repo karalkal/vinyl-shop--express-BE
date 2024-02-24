@@ -25,24 +25,27 @@ function createInsertQuery(tableName, dataToInsert) {
         values = [dataToInsert.albumId, dataToInsert.genreId]
     }
     if (tableName === "db_user") {
+        console.log(dataToInsert)
         text = 'INSERT INTO ' + tableName + ' (f_name, l_name, email, password_hash, house_number, street_name, city, country, is_admin, is_contributor) '
             + ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *'
         values = [      // password MUST be received as hashed value
-            dataToInsert.f_name, dataToInsert.l_name, dataToInsert.email, dataToInsert.password_hash, dataToInsert.house_number,
-            dataToInsert.street_name, dataToInsert.city, dataToInsert.country, dataToInsert.is_admin || false, dataToInsert.is_contributor || false
+            dataToInsert.f_name, dataToInsert.l_name, 
+            dataToInsert.email, dataToInsert.password_hash, 
+            dataToInsert.house_number,
+            dataToInsert.street_name, dataToInsert.city, 
+            dataToInsert.country, 
+            dataToInsert.is_admin || false, 
+            dataToInsert.is_contributor || false
         ]
     }
-    if (tableName === "cart") {
-        text = 'INSERT INTO ' + tableName + ' (cart_no, album_id, user_id) '
-            + ' VALUES ($1, $2, $3) RETURNING *'
-        values = [dataToInsert.cart_no, dataToInsert.album_id, dataToInsert.user_id]
-    }
     if (tableName === "purchase") {
-        text = 'INSERT INTO ' + tableName + ' (cart_no, placed_on, fulfilled_on, user_id) '
+        text = 'INSERT INTO ' + tableName + ' (user_id, total, placed_on, fulfilled_on) '
             + ' VALUES ($1, $2, $3, $4) RETURNING *'
-        values = [dataToInsert.cart_no, new Date(Date.now()), dataToInsert.fulfilled_on || null, dataToInsert.user_id]
+        values = [dataToInsert.user_id,
+        dataToInsert.total,
+        new Date(Date.now()),
+        dataToInsert.fulfilled_on || null]
     }
-
 
     return { text, values }   // as object
 }

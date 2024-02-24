@@ -24,30 +24,30 @@ const register = async (req, res, next) => {
     country: req.body.country
   }
 
-  console.log(userData)
-
   // Validations
   const undefinedProperty = verifyNonNullableFields("db_user", userData);
   if (undefinedProperty) {
     return next(createCustomError(`Cannot create: essential data missing - ${undefinedProperty}`, StatusCodes.BAD_REQUEST));
   }
 
+
   const passTooShort = stringLengthValidator(userData.password, 4, 35)  // min, max
   if (passTooShort) {
     return next(createCustomError(`Password must be between 4 and 35 chars`, StatusCodes.BAD_REQUEST));
   }
-  const f_nameTooShort = stringLengthValidator(userData.f_name, 3, 44)  // min, max
+  const f_nameTooShort = stringLengthValidator(userData.f_name, 1, 44)  // min, max
   if (f_nameTooShort) {
-    return next(createCustomError(`First Name must be between 3 and 44 chars`, StatusCodes.BAD_REQUEST));
+    return next(createCustomError(`First Name must be between 1 and 44 chars`, StatusCodes.BAD_REQUEST));
   }
-  const l_nameTooShort = stringLengthValidator(userData.l_name, 3, 44)  // min, max
+  const l_nameTooShort = stringLengthValidator(userData.l_name, 1, 44)  // min, max
   if (l_nameTooShort) {
-    return next(createCustomError(`Last Name must be between 3 and 44 chars`, StatusCodes.BAD_REQUEST));
+    return next(createCustomError(`Last Name must be between 1 and 44 chars`, StatusCodes.BAD_REQUEST));
   }
   const emailIsValid = emailValidator(userData.email)    // regex checks for VALID
   if (!emailIsValid) {
     return next(createCustomError(`Invalid email format`, StatusCodes.BAD_REQUEST));
   }
+
 
   // Encrypt password
   const salt = await bcrypt.genSalt(10)
@@ -55,7 +55,7 @@ const register = async (req, res, next) => {
   delete userData.password    // just in case
 
   // Create the user and return jwt if successful, error if not
-  const insertQuery = createInsertQuery("db_user", userData)
+  const insertQuery = createInsertQuery("db_user", userData);
 
   pool.query(insertQuery, (error, results) => {
     if (error) {

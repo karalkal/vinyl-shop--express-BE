@@ -15,7 +15,7 @@ ordersRouter.get("/:userId/:orderId", userAuthentication, getOrdersByUserAndOrde
 ordersRouter.post("/", userAuthentication, createOrder);
 // admins only can remove orders
 ordersRouter.delete("/:orderId", adminAuthorization, deleteOrder);
-// admin access only - allowes changes to status to shipped, completed etc.
+// admin access only - allows changes to status to shipped, completed etc.
 ordersRouter.put("/:orderId", adminAuthorization, updateOrder);
 
 

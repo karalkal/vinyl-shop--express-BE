@@ -15,6 +15,7 @@ const userAuthentication = async (req, res, next) => {
     const payload = jwt.verify(token, process.env.JWT_SECRET)
     // attach the user to request
     req.user = payload.user
+    console.log("passed userAuth")
     next()
   } catch (error) {
     return next(createCustomError(`Error: ${error}`, StatusCodes.UNAUTHORIZED))
