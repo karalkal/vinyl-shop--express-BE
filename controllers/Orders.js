@@ -53,17 +53,22 @@ const getOrdersByUserAndOrderId = (req, res, next) => {
 }
 
 const createOrder = async (req, res, next) => {
-    console.log(req.body.userEmail, req.user.email);
     // First check if the user is creating order for themselves - you cannot allow user 1 to create order for user 2
     // only admins and the user themselves can access this route- middleware creates req.user
     // NB - Here userId is not param but is within body
     if (req.body.userEmail !== req.user.email && !req.user.is_admin) {
         return next(createCustomError('You cannot create orders for other users, obviously', StatusCodes.BAD_REQUEST));
     }
+    // Don't forget - user can order numerous copies of same item
+    const count_items = 0;
+    for (let al of req.body.albums){
+        count_items += al.amountRequested
+    }
 
     const orderData = {
         total: req.body.totalFromFE,
-        user_id: req.user.userId
+        user_id: req.user.userId,
+        count_items
     }
     // Validations
     const undefinedProperty = verifyNonNullableFields("purchase", orderData);
@@ -78,20 +83,40 @@ const createOrder = async (req, res, next) => {
         }
         // Not sure if we can get any different but just in case -> rowCount: 1 if item is notFound, otherwise 0
         if (results.rowCount && results.rowCount !== 1) {
-            return next(createCustomError(`Could not create user`, StatusCodes.BAD_REQUEST))
+            return next(createCustomError(`Could not create purchase`, StatusCodes.BAD_REQUEST))
         }
-        // If all is good
+        // If all is good, try to create intermediary table entry first and if successful, then return ok
         const purchaseId = results.rows[0].id
-        createAlbumOrderEntry(purchaseId, req.body)
+        createAlbumOrderEntry(purchaseId, req.body.albumsOrdered, req, res, next)
 
         res.status(StatusCodes.CREATED).json(results.rows)
     })
 }
 
-function createAlbumOrderEntry(purchaseId, albums) {
-    // for (let album of albums) {
-        console.log(purchaseId, albums)
-        // const insertQuery = createInsertQuery("album_order", purchaseId, album)
+// This function will be called once a new order/purchase has been created
+async function createAlbumOrderEntry(purchaseId, albums, req, res, next) {
+    for (let album of albums) {
+        let copiesOrdered = Number(album.amountRequested);
+        let albumId = album.id;
+        // can actually create orderData here as inner loop just deals with copiesOrdered 
+        const orderData = { purchaseId, albumId }
+
+        // for each album copy ordered separate entry in the table
+        for (let copyNo = 1; copyNo <= copiesOrdered; copyNo++) {
+
+            const insertQuery = createInsertQuery("album_purchase", orderData);
+
+            pool.query(insertQuery, (error, results) => {
+                if (error) {
+                    return next(createCustomError(error, StatusCodes.BAD_REQUEST))
+                }
+                if (results.rowCount && results.rowCount !== 1) {
+                    return next(createCustomError(`Could not write in album_purchase table`, StatusCodes.BAD_REQUEST))
+                }
+                return
+                // res.status(StatusCodes.CREATED).json(results.rows)
+            })
+        }
     }
 }
 

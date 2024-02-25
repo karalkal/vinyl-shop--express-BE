@@ -1,5 +1,5 @@
 -- redundant as cart will be stored locally on FE only
-drop table cart;
+drop table if exists cart;
 
 -- check contraints of purchase
 SELECT con.*
@@ -12,6 +12,7 @@ SELECT con.*
        WHERE nsp.nspname = 'public' AND rel.relname = 'purchase';
 
 -- recreate table purchase;
+drop table if exists  album_purchase;
 drop table purchase;
 
 CREATE TABLE IF NOT EXISTS purchase(
@@ -20,18 +21,17 @@ CREATE TABLE IF NOT EXISTS purchase(
 		total numeric(5, 2),
 		placed_on TIMESTAMP DEFAULT NULL,	-- js will timestamp both, former upon POST, latter upon UPDATE
 		fulfilled_on TIMESTAMP DEFAULT NULL
-	);
+		);
 	
 CREATE TABLE IF NOT EXISTS album_purchase(
-  album_id INTEGER REFERENCES album(id),
-  purchase_id INTEGER REFERENCES purchase(id),
-  PRIMARY KEY(album_id, purchase_id)
-);
+	id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	album_id INTEGER REFERENCES album(id),
+	purchase_id INTEGER REFERENCES purchase(id)
+	);
 
 select * from db_user;
 select * from purchase;
+select * from album_purchase;
 
-INSERT into purchase(user_id, total, placed_on)
-values (1, 100, NOW());
-
+-- solved error with 'invalid' pass
 ALTER USER postgres WITH PASSWORD 'postgres';
