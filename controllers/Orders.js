@@ -60,8 +60,9 @@ const createOrder = async (req, res, next) => {
         return next(createCustomError('You cannot create orders for other users, obviously', StatusCodes.BAD_REQUEST));
     }
     // Don't forget - user can order numerous copies of same item
-    const count_items = 0;
-    for (let al of req.body.albums){
+    console.log(req.body)
+    let count_items = 0;
+    for (let al of req.body.albumsOrdered){
         count_items += al.amountRequested
     }
 

@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS purchase(
 		user_id integer REFERENCES db_user(id),
 		total numeric(5, 2),
 		placed_on TIMESTAMP DEFAULT NULL,	-- js will timestamp both, former upon POST, latter upon UPDATE
-		fulfilled_on TIMESTAMP DEFAULT NULL
+		fulfilled_on TIMESTAMP DEFAULT NULL,
+		count_items integer
 		);
 	
 CREATE TABLE IF NOT EXISTS album_purchase(
