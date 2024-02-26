@@ -36,3 +36,15 @@ select * from album_purchase;
 
 -- solved error with 'invalid' pass
 ALTER USER postgres WITH PASSWORD 'postgres';
+
+select *,  
+	array(
+		SELECT album.id 
+    	from album 
+    	LEFT JOIN album_purchase 
+    	on album_purchase.album_id = album_purchase.id
+		
+    	) as albums_ordered
+from purchase
+WHERE purchase.user_id = 10
+ORDER BY id ASC;

@@ -8,9 +8,13 @@ const { createCustomError } = require('../errors/custom-error')
 // If regular user, they can view their own orders only
 const getAllOrders = (req, res, next) => {
     // getting req.user from auth middleware
-    const whereClause = req.user.is_admin ? '' : `WHERE purchase.user_id = ${req.user.userId}`
+    const whereClause = req.user.is_admin ? '' : `WHERE purchase.user_id = ${req.user.userId}`;
 
-    pool.query(`SELECT * FROM purchase ${whereClause} ORDER BY id ASC `, (error, results) => {
+    pool.query(`SELECT *, 
+                array (SELECT album.id from album LEFT JOIN album_purchase on album_purchase.album_id = album_purchase.id) 
+                as albums_ordered 
+        from purchase ${whereClause} 
+        ORDER BY id ASC;`, (error, results) => {
         if (error) {
             return next(createCustomError(error, StatusCodes.BAD_REQUEST))
         }
@@ -60,9 +64,9 @@ const createOrder = async (req, res, next) => {
         return next(createCustomError('You cannot create orders for other users, obviously', StatusCodes.BAD_REQUEST));
     }
     // Don't forget - user can order numerous copies of same item
-    console.log(req.body)
+    // console.log(JSON.stringify(req.body))
     let count_items = 0;
-    for (let al of req.body.albumsOrdered){
+    for (let al of req.body.albumsOrdered) {
         count_items += al.amountRequested
     }
 
