@@ -9,11 +9,15 @@ const { createCustomError } = require('../errors/custom-error')
 const getAllOrders = (req, res, next) => {
     // getting req.user from auth middleware
     const whereClause = req.user.is_admin ? '' : `WHERE purchase.user_id = ${req.user.userId}`;
-
     pool.query(`SELECT *, 
-                array (SELECT album.id from album LEFT JOIN album_purchase on album_purchase.album_id = album_purchase.id) 
-                as albums_ordered 
-        from purchase ${whereClause} 
+    array (
+        SELECT array(
+            select(album.id,album.name, album.colour, album.price, album.cover, album.band_name) 
+            as album_data
+        ) from album LEFT JOIN album_purchase on album_purchase.purchase_id = album_purchase.id) 
+    as albums_ordered 
+    from purchase 
+    ${whereClause} 
         ORDER BY id ASC;`, (error, results) => {
         if (error) {
             return next(createCustomError(error, StatusCodes.BAD_REQUEST))
