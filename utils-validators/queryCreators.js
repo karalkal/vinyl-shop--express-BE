@@ -21,8 +21,12 @@ function createSelectQuery(tableName, data) {
         from purchase 
         LEFT JOIN db_user on db_user.id = purchase.user_id 
         ${data}                            
-        ORDER BY db_user.id ASC`
-    }
+        ORDER BY db_user.id ASC,
+        purchase.placed_on DESC;
+        --user id, then latest orders first
+        `
+     }
+
 
     return { text, values }  // as object
 }

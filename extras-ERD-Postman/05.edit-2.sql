@@ -67,7 +67,9 @@ SELECT
     from purchase 
     LEFT JOIN db_user on db_user.id = purchase.user_id 
 -- 	where db_user.id = 10
-ORDER BY db_user.id ASC;
+ORDER BY db_user.id ASC,
+purchase.placed_on DESC;
+--user id, then latest orders first;
 
 select * from purchase;
 update purchase 
