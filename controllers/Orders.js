@@ -1,38 +1,22 @@
 const { StatusCodes } = require('http-status-codes')
 const { pool } = require('../db/connect')
 
-const { createInsertQuery, createDeleteQuery, createUpdateQuery } = require('../utils-validators/queryCreators')
+const { createInsertQuery, createDeleteQuery, createUpdateQuery, createSelectQuery } = require('../utils-validators/queryCreators')
 const { idIntegerValidator, verifyNonNullableFields } = require('../utils-validators/validators')
 const { createCustomError } = require('../errors/custom-error')
 
 // If regular user, they can view their own orders only
 const getAllOrders = (req, res, next) => {
     // getting req.user from auth middleware
-    const whereClause = req.user.is_admin ? '' : `WHERE purchase.user_id = ${req.user.userId}`;
-    pool.query(`SELECT 	
-    purchase.id as "purchase_id",
-    db_user.id as "user_id",
-    db_user.email as "user_email", 
-    db_user.f_name as "f_name",
-    db_user.l_name as "l_name",
-    purchase.placed_on,
-    purchase.fulfilled_on,
-    purchase.total		
-    , array (
-        SELECT array(
-            select(album.id,album.name, album.colour, album.price, album.cover, album.band_name) as album_data
-        ) from album 
-        LEFT JOIN album_purchase on album_purchase.purchase_id = album_purchase.id ) 
-    as albums_ordered 
-    from purchase 
-    LEFT JOIN db_user on db_user.id = purchase.user_id 
-    ${whereClause}
-    ORDER BY db_user.id ASC`, (error, results) => {
+    const whereClause = req.user.is_admin ? '  ' : `WHERE purchase.user_id = ${req.user.userId}`;
+
+    const selectQuery = createSelectQuery("purchase", whereClause);
+    
+    pool.query(selectQuery, (error, results) => {
         if (error) {
             console.log(error)
             return next(createCustomError(error, StatusCodes.BAD_REQUEST))
         }
-        console.log(results.rows)
         res.status(StatusCodes.OK).json(results.rows)
     })
 }

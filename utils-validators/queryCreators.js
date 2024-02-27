@@ -1,3 +1,34 @@
+function createSelectQuery(tableName, data) {
+    let text
+    let values
+    console.log(data)
+
+
+    if (tableName === "purchase") {
+        text = `SELECT 	
+        purchase.id as "purchase_id",
+        db_user.id as "user_id",
+        db_user.email as "user_email", 
+        db_user.f_name as "f_name",
+        db_user.l_name as "l_name",
+        purchase.placed_on,
+        purchase.fulfilled_on,
+        purchase.total		
+        , array (
+            SELECT array(
+                select(album.id,album.name, album.colour, album.price, album.cover, album.band_name) as album_data
+            ) from album 
+            LEFT JOIN album_purchase on album_purchase.purchase_id = album_purchase.id ) 
+        as albums_ordered 
+        from purchase 
+        LEFT JOIN db_user on db_user.id = purchase.user_id 
+        ${data}                            
+        ORDER BY db_user.id ASC`
+    }
+
+    return { text, values }  // as object
+}
+
 function createInsertQuery(tableName, dataToInsert) {
     let text
     let values
@@ -125,4 +156,4 @@ function createUpdateQuery(tableName, itemId, updatedData) {
     return { text, values }   // as object
 }
 
-module.exports = { createInsertQuery, createDeleteQuery, createUpdateQuery }
+module.exports = { createSelectQuery, createInsertQuery, createDeleteQuery, createUpdateQuery }
