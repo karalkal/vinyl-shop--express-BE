@@ -14,7 +14,6 @@ const getAllOrders = (req, res, next) => {
     
     pool.query(selectQuery, (error, results) => {
         if (error) {
-            console.log(error)
             return next(createCustomError(error, StatusCodes.BAD_REQUEST))
         }
         res.status(StatusCodes.OK).json(results.rows)
@@ -30,18 +29,7 @@ const getOrdersByUserAndOrderId = (req, res, next) => {
         return next(createCustomError('Regular users can view their own orders only', StatusCodes.BAD_REQUEST));
     }
 
-    pool.query(`SELECT *, array(
-            SELECT album.id 
-            from album 
-            LEFT JOIN cart 
-            on cart.album_id = album.id
-            LEFT JOIN purchase 
-            on purchase.cart_no = cart.cart_no
-            WHERE cart.user_id = ${userId}
-            AND purchase.id = ${orderId}
-
-            ) as albums_ordered
-            FROM purchase            
+    pool.query(`SELECT * FROM purchase            
             WHERE purchase.user_id = ${userId}
             AND purchase.id = ${orderId}
             `, (error, results) => {

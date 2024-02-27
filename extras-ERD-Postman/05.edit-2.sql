@@ -48,3 +48,33 @@ select *,
 from purchase
 WHERE purchase.user_id = 10
 ORDER BY id ASC;
+
+SELECT 	
+    purchase.id as "purchase_id",
+    db_user.id as "user_id",
+    db_user.email as "user_email", 
+    db_user.f_name as "f_name",
+    db_user.l_name as "l_name",
+    purchase.placed_on,
+    purchase.fulfilled_on,
+    purchase.total		
+    , array (
+        SELECT array(
+            select(album.id,album.name, album.colour, album.price, album.cover, album.band_name) as album_data
+        ) from album 
+        LEFT JOIN album_purchase on album_purchase.purchase_id = album_purchase.id ) 
+    as albums_ordered 
+    from purchase 
+    LEFT JOIN db_user on db_user.id = purchase.user_id 
+-- 	where db_user.id = 10
+ORDER BY db_user.id ASC;
+
+select * from purchase;
+update purchase 
+set fulfilled_on = now() 
+where id=2;
+
+select *  from album_purchase;
+
+select * from album;
+

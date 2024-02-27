@@ -1,8 +1,6 @@
 function createSelectQuery(tableName, data) {
     let text
     let values
-    console.log(data)
-
 
     if (tableName === "purchase") {
         text = `SELECT 	
@@ -98,14 +96,6 @@ function createDeleteQuery(tableName, firstArg, secondArg, thirdArg) {
     if (tableName === "album_genre") {
         text = 'DELETE FROM ' + tableName + ' WHERE album_id=$1 AND genre_id=$2'
         values = [firstArg, secondArg]
-    }       // used to empty cart and to remove item, will depend on first arg - cart_no or id
-    if (tableName === "cart" && firstArg === "empty") {
-        text = 'DELETE FROM ' + tableName + ' WHERE cart_no = $1 AND user_id = $2'
-        values = [secondArg, thirdArg]
-    }
-    if (tableName === "cart" && firstArg === "remove_single") {
-        text = 'DELETE FROM ' + tableName + ' WHERE id = $1 AND user_id = $2'
-        values = [secondArg, thirdArg]
     }
     if (tableName === "purchase") {
         text = 'DELETE FROM ' + tableName + ' WHERE id=$1'
