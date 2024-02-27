@@ -9,19 +9,30 @@ const { createCustomError } = require('../errors/custom-error')
 const getAllOrders = (req, res, next) => {
     // getting req.user from auth middleware
     const whereClause = req.user.is_admin ? '' : `WHERE purchase.user_id = ${req.user.userId}`;
-    pool.query(`SELECT *, 
-    array (
+    pool.query(`SELECT 	
+    purchase.id as "purchase_id",
+    db_user.id as "user_id",
+    db_user.email as "user_email", 
+    db_user.f_name as "f_name",
+    db_user.l_name as "l_name",
+    purchase.placed_on,
+    purchase.fulfilled_on,
+    purchase.total		
+    , array (
         SELECT array(
-            select(album.id,album.name, album.colour, album.price, album.cover, album.band_name) 
-            as album_data
-        ) from album LEFT JOIN album_purchase on album_purchase.purchase_id = album_purchase.id) 
+            select(album.id,album.name, album.colour, album.price, album.cover, album.band_name) as album_data
+        ) from album 
+        LEFT JOIN album_purchase on album_purchase.purchase_id = album_purchase.id ) 
     as albums_ordered 
     from purchase 
-    ${whereClause} 
-        ORDER BY id ASC;`, (error, results) => {
+    LEFT JOIN db_user on db_user.id = purchase.user_id 
+    ${whereClause}
+    ORDER BY db_user.id ASC`, (error, results) => {
         if (error) {
+            console.log(error)
             return next(createCustomError(error, StatusCodes.BAD_REQUEST))
         }
+        console.log(results.rows)
         res.status(StatusCodes.OK).json(results.rows)
     })
 }
