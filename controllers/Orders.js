@@ -11,8 +11,10 @@ const getAllOrders = (req, res, next) => {
     const whereClause = req.user.is_admin ? '  ' : `WHERE purchase.user_id = ${req.user.userId}`;
 
     const selectQuery = createSelectQuery("purchase", whereClause);
-    
+
     pool.query(selectQuery, (error, results) => {
+        console.log(results.rows)
+
         if (error) {
             return next(createCustomError(error, StatusCodes.BAD_REQUEST))
         }

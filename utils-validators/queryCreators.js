@@ -3,7 +3,9 @@ function createSelectQuery(tableName, data) {
     let values
 
     if (tableName === "purchase") {
-        text = `SELECT 	
+        let whereClause = data      // will be '' if admin or where purchase.user_id = [number]
+        text = `
+        SELECT 	
         purchase.id as "purchase_id",
         db_user.id as "user_id",
         db_user.email as "user_email", 
@@ -11,19 +13,22 @@ function createSelectQuery(tableName, data) {
         db_user.l_name as "l_name",
         purchase.placed_on,
         purchase.fulfilled_on,
-        purchase.total		
-        , array (
-            SELECT array(
-                select(album.id,album.name, album.colour, album.price, album.cover, album.band_name) as album_data
-            ) from album 
-            LEFT JOIN album_purchase on album_purchase.purchase_id = album_purchase.id ) 
-        as albums_ordered 
-        from purchase 
-        LEFT JOIN db_user on db_user.id = purchase.user_id 
-        ${data}                            
+        purchase.total,
+	 	jsonb_build_array
+		(
+			album.id, album.name, album.colour,
+			album.price, album.cover, album.band_name
+		) AS "album_info"
+	    FROM album 
+	    LEFT JOIN album_purchase ON album.id = album_purchase.album_id
+	    LEFT JOIN purchase ON purchase.id = album_purchase.purchase_id
+	    LEFT JOIN db_user ON db_user.id = purchase.user_id
+        WHERE purchase.id IS NOT NULL
+        -- 	F knows why this is necessary
+        ${whereClause}
         ORDER BY db_user.id ASC,
         purchase.placed_on DESC;
-        --user id, then latest orders first
+   	    --user id, then latest orders first
         `
      }
 
