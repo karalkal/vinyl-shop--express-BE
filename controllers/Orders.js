@@ -8,16 +8,17 @@ const { createCustomError } = require('../errors/custom-error')
 // If regular user, they can view their own orders only
 const getAllOrders = (req, res, next) => {
     // getting req.user from auth middleware
-    const whereClause = req.user.is_admin ? '  ' : `WHERE purchase.user_id = ${req.user.userId}`;
+    const whereClause = req.user.is_admin ? '  ' : `AND purchase.user_id = ${req.user.userId}`;
 
     const selectQuery = createSelectQuery("purchase", whereClause);
 
     pool.query(selectQuery, (error, results) => {
-        console.log(results.rows)
-
         if (error) {
+            console.log(error)
             return next(createCustomError(error, StatusCodes.BAD_REQUEST))
         }
+        // if nothing return empty array
+        console.log(results.rows)
         res.status(StatusCodes.OK).json(results.rows)
     })
 }

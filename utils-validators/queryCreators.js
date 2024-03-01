@@ -3,7 +3,7 @@ function createSelectQuery(tableName, data) {
     let values
 
     if (tableName === "purchase") {
-        let whereClause = data      // will be '' if admin or where purchase.user_id = [number]
+        let whereClause = data      // will be '' if admin or AND purchase.user_id = [number]
         text = `
         SELECT 	
         purchase.id as "purchase_id",
@@ -16,15 +16,14 @@ function createSelectQuery(tableName, data) {
         purchase.total,
 	 	jsonb_build_array
 		(
-			album.id, album.name, album.colour,
-			album.price, album.cover, album.band_name
+			album.id, album.cover, album.name, album.band_name, 
+            album.release_year, album.colour, album.price 
 		) AS "album_info"
 	    FROM album 
 	    LEFT JOIN album_purchase ON album.id = album_purchase.album_id
 	    LEFT JOIN purchase ON purchase.id = album_purchase.purchase_id
 	    LEFT JOIN db_user ON db_user.id = purchase.user_id
         WHERE purchase.id IS NOT NULL
-        -- 	F knows why this is necessary
         ${whereClause}
         ORDER BY db_user.id ASC,
         purchase.placed_on DESC;
