@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllAlbums, getAlbumById, createAlbum, deleteAlbum, updateAlbum } = require('../controllers/Albums');
+const { getAllAlbums, findAlbums, getAlbumById, createAlbum, deleteAlbum, updateAlbum } = require('../controllers/Albums');
 const userAuthentication = require('../middleware/userAuthentication');
 const adminAuthorization = require('../middleware/adminAuthorization');
 
@@ -9,6 +9,7 @@ const albumsRouter = express.Router({ mergeParams: true });
 
 // anyone can view, only admins can create, update, delete
 albumsRouter.get("/", getAllAlbums);
+albumsRouter.get("/search", findAlbums);
 albumsRouter.get("/:albumId", getAlbumById);
 albumsRouter.post("/", adminAuthorization, createAlbum);
 albumsRouter.delete("/:albumId", adminAuthorization, deleteAlbum);

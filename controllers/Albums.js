@@ -14,6 +14,22 @@ const getAllAlbums = (req, res, next) => {
     })
 }
 
+const findAlbums = (req, res, next) => {
+    const searchTerm = req.query.term;
+
+    console.log(req.query)
+    pool.query(`SELECT id, name, band_name, cover, release_year, colour, 
+    price FROM album 
+    WHERE name LIKE '%${searchTerm}%'
+    OR band_name LIKE '%${searchTerm}%'
+    ORDER BY id ASC`, (error, results) => {
+        if (error) {
+            return next(createCustomError(error, StatusCodes.BAD_REQUEST))
+        }
+        res.status(StatusCodes.OK).json(results.rows)
+    })
+}
+
 const getAlbumById = (req, res, next) => {
     const { albumId } = req.params
     const idIsInteger = idIntegerValidator(albumId);
@@ -118,4 +134,4 @@ const updateAlbum = (req, res, next) => {
 }
 
 
-module.exports = { getAllAlbums, getAlbumById, createAlbum, deleteAlbum, updateAlbum }
+module.exports = { getAllAlbums, findAlbums, getAlbumById, createAlbum, deleteAlbum, updateAlbum }
