@@ -1,11 +1,21 @@
-const { StatusCodes } = require('http-status-codes')
-const { pool } = require('../db/connect')
-const bcrypt = require('bcryptjs')
+const { StatusCodes, OK } = require('http-status-codes');
+const bcrypt = require('bcryptjs');
+const { OAuth2Client } = require('google-auth-library');
 
-const { createInsertQuery } = require('../utils-validators/queryCreators')
+const { pool } = require('../db/connect');
+const { createInsertQuery } = require('../utils-validators/queryCreators');
 const { verifyNonNullableFields, stringLengthValidator, emailValidator } = require('../utils-validators/validators')
-const { createCustomError, CustomAPIError } = require('../errors/custom-error')
 const { createJWT } = require('../utils-validators/jwt')
+const { createCustomError, CustomAPIError } = require('../errors/custom-error');
+
+// for google oauth
+require('dotenv').config();
+
+const oAuth2Client = new OAuth2Client(
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_CLIENT_SECRET,
+  'postmessage',
+);
 
 
 // const register = async (req, res, next) => { res.send({ "reg works": true }) }
@@ -110,8 +120,18 @@ const login = async (req, res, next) => {
   })
 }
 
+const google = async (req, res, next) => {
+  console.log("body", req.body.code);
+  console.log(req.body.code);
+  const { tokens } = await oAuth2Client.getToken(req.body.code); // exchange code for tokens
+
+  res.status(StatusCodes.OK).json(tokens);
+
+};
+
 
 module.exports = {
   register,
-  login
+  login,
+  google
 }
