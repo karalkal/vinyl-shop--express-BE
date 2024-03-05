@@ -130,12 +130,31 @@ const google = async (req, res, next) => {
       to include user's data (email and names)
       and ensure consistency with our existing db_user table      
   */
-  const userData = await processGoogleUserData(tokens).catch(console.error);
+  const userData = await processGoogleUserData(tokens)
+    .catch(console.error);
 
-  console.log("userData", userData)
+  // need to create entry in user_db table for logged in google user, use fake password
+  const queryData = {
+    f_name: userData.first_name,
+    l_name: userData.last_name,
+    email: userData.email,
+    password_hash: "google user, no pass required",
+  }
+  const insertQuery = createInsertQuery("db_user", queryData);
 
-  res.status(StatusCodes.OK).json(userData);
-
+  pool.query(insertQuery, (error, results) => {
+    // TODO NEED TO CHECK IF GOOGLE USER EXISTS
+    if (error) {
+      console.log(error);
+      return next(createCustomError(error, StatusCodes.BAD_REQUEST));
+    }
+    // Not sure if we can get any different but just in case -> rowCount: 1 if item is notFound, otherwise 0
+    if (results.rowCount && results.rowCount !== 1) {
+      return next(createCustomError(`Could not create user`, StatusCodes.BAD_REQUEST))
+    }
+    // If all is good, user is created 
+    res.status(StatusCodes.OK).json(userData);
+  })
 }
 
 

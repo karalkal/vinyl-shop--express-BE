@@ -63,14 +63,16 @@ const createOrder = async (req, res, next) => {
     const orderData = {
         total: req.body.totalFromFE,
         user_id: req.user.userId,
-        count_items
+        count_items,
     }
     // Validations
     const undefinedProperty = verifyNonNullableFields("purchase", orderData);
     if (undefinedProperty) {
         return next(createCustomError(`Cannot create: essential data missing - ${undefinedProperty}`, StatusCodes.BAD_REQUEST));
     }
-    const insertQuery = createInsertQuery("purchase", orderData)
+
+    console.log(orderData);
+    const insertQuery = createInsertQuery("purchase", orderData);
 
     pool.query(insertQuery, (error, results) => {
         if (error) {
