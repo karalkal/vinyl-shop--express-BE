@@ -20,7 +20,7 @@ async function processGoogleUserData(tokens) {
         token: jwtToken,
     }
 
-    return userData
+    return userData;
 }
 
 module.exports = { processGoogleUserData }

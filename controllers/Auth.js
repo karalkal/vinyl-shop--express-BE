@@ -133,28 +133,34 @@ const google = async (req, res, next) => {
   const userData = await processGoogleUserData(tokens)
     .catch(console.error);
 
-  // need to create entry in user_db table for logged in google user, use fake password
-  const queryData = {
-    f_name: userData.first_name,
-    l_name: userData.last_name,
-    email: userData.email,
-    password_hash: "google user, no pass required",
-  }
-  const insertQuery = createInsertQuery("db_user", queryData);
+  // TODO NEED TO CHECK IF GOOGLE USER EXISTS
+  const checkIfUserExists = await pool.query(`SELECT * FROM db_user where email = '${userData.email}'`);
+  const userDoesExist = checkIfUserExists.rowCount === 1
 
-  pool.query(insertQuery, (error, results) => {
-    // TODO NEED TO CHECK IF GOOGLE USER EXISTS
-    if (error) {
-      console.log(error);
-      return next(createCustomError(error, StatusCodes.BAD_REQUEST));
+  if (!userDoesExist) {
+    // need to create entry in user_db table for logged in google user, use fake password
+    const queryData = {
+      f_name: userData.first_name,
+      l_name: userData.last_name,
+      email: userData.email,
+      password_hash: "google user, no pass required",
     }
-    // Not sure if we can get any different but just in case -> rowCount: 1 if item is notFound, otherwise 0
-    if (results.rowCount && results.rowCount !== 1) {
-      return next(createCustomError(`Could not create user`, StatusCodes.BAD_REQUEST))
-    }
-    // If all is good, user is created 
-    res.status(StatusCodes.OK).json(userData);
-  })
+    const insertQuery = createInsertQuery("db_user", queryData);
+
+    pool.query(insertQuery, (error, results) => {
+      if (error) {
+        console.log(error);
+        return next(createCustomError(error, StatusCodes.BAD_REQUEST));
+      }
+      // Not sure if we can get any different but just in case -> rowCount: 1 if item is notFound, otherwise 0
+      if (results.rowCount && results.rowCount !== 1) {
+        return next(createCustomError(`Could not create user`, StatusCodes.BAD_REQUEST))
+      }
+      // If all is good, user is created 
+    })
+  }
+  // User has just been created or userDoesExist was true -->> return userData to FE
+  res.status(StatusCodes.OK).json(userData);
 }
 
 
