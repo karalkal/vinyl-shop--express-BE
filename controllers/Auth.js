@@ -5,7 +5,8 @@ const { OAuth2Client } = require('google-auth-library');
 const { pool } = require('../db/connect');
 const { createInsertQuery } = require('../utils-validators/queryCreators');
 const { verifyNonNullableFields, stringLengthValidator, emailValidator } = require('../utils-validators/validators')
-const { createJWT } = require('../utils-validators/jwt')
+const { createJWT } = require('../utils-validators/jwt');
+const { processGoogleUserData } = require('../utils-validators/processGoogleUserData')
 const { createCustomError, CustomAPIError } = require('../errors/custom-error');
 
 // for google oauth
@@ -121,13 +122,21 @@ const login = async (req, res, next) => {
 }
 
 const google = async (req, res, next) => {
-  console.log("body", req.body.code);
-  console.log(req.body.code);
+  // console.log("body", req.body.code);
   const { tokens } = await oAuth2Client.getToken(req.body.code); // exchange code for tokens
 
-  res.status(StatusCodes.OK).json(tokens);
+  /*  The tokens returned from google's api contain more info than this app needs.
+      Here we are constructing a new object from it to return it to FE 
+      to include user's data (email and names)
+      and ensure consistency with our existing db_user table      
+  */
+  const userData = await processGoogleUserData(tokens).catch(console.error);
 
-};
+  console.log("userData", userData)
+
+  res.status(StatusCodes.OK).json(userData);
+
+}
 
 
 module.exports = {
