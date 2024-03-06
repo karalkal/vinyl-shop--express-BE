@@ -8,16 +8,12 @@ async function processGoogleUserData(tokens) {
         audience: process.env.GOOGLE_CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
     });
     const payload = ticket.getPayload();
-
-    // google UserId is payload.sub in original object, false, false are for isContributor, isAdmin
-    let jwtToken = createJWT(payload.sub, payload.email, false, false)
-
+    // console.log(payload);
 
     const userData = {
         email: payload.email,
         first_name: payload.given_name,
         last_name: payload.family_name,
-        token: jwtToken,
     }
 
     return userData;

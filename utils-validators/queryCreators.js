@@ -29,7 +29,7 @@ function createSelectQuery(tableName, data) {
         purchase.placed_on DESC;
    	    --user id, then latest orders first
         `
-     }
+    }
 
 
     return { text, values }  // as object
@@ -62,7 +62,6 @@ function createInsertQuery(tableName, dataToInsert) {
         values = [dataToInsert.albumId, dataToInsert.genreId]
     }
     if (tableName === "db_user") {
-        console.log(dataToInsert)
         text = 'INSERT INTO ' + tableName + ' (f_name, l_name, email, password_hash, house_number, street_name, city, country, is_admin, is_contributor) '
             + ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *'
         values = [      // password MUST be received as hashed value

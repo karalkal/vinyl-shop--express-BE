@@ -19,7 +19,6 @@ const oAuth2Client = new OAuth2Client(
 );
 
 
-// const register = async (req, res, next) => { res.send({ "reg works": true }) }
 const register = async (req, res, next) => {
   // allow only account creation excluding is_admin and is_contributor props (even if in body these will be excluded from the request),
   // need to manually set up admins in DB - update db_user set is_contributor = true, is_admin = true where id = 1
@@ -88,7 +87,6 @@ const register = async (req, res, next) => {
   })
 }
 
-// const login = async (req, res, next) => { res.send({ "reg works": true }) }
 const login = async (req, res, next) => {
   const { email, password } = req.body
 
@@ -122,45 +120,76 @@ const login = async (req, res, next) => {
 }
 
 const google = async (req, res, next) => {
-  // console.log("body", req.body.code);
   const { tokens } = await oAuth2Client.getToken(req.body.code); // exchange code for tokens
 
-  /*  The tokens returned from google's api contain more info than this app needs.
-      Here we are constructing a new object from it to return it to FE 
-      to include user's data (email and names)
-      and ensure consistency with our existing db_user table      
+  /*  The tokens returned from google's api contain different user data than the one this app needs.
+      To ensure consistency with our existing db_user table
+      we are constructing a new object from it to include user's data (email and names).
+      Later we add the user_id from our db, not the google one, create jwt and send the whole thing to FE
   */
-  const userData = await processGoogleUserData(tokens)
-    .catch(console.error);
+  try {
+    // from google user object construct out own user object excluding id
+    const userData = await processGoogleUserData(tokens);
 
-  // TODO NEED TO CHECK IF GOOGLE USER EXISTS
-  const checkIfUserExists = await pool.query(`SELECT * FROM db_user where email = '${userData.email}'`);
-  const userDoesExist = checkIfUserExists.rowCount === 1
+    const foundUser = await pool.query(`SELECT * FROM db_user where email = '${userData.email}'`);
 
-  if (!userDoesExist) {
-    // need to create entry in user_db table for logged in google user, use fake password
-    const queryData = {
-      f_name: userData.first_name,
-      l_name: userData.last_name,
-      email: userData.email,
-      password_hash: "google user, no pass required",
+    // USER EXISTS -->> attach id from data returned from query
+    if (foundUser.rowCount === 1) {
+      console.log("OLD?", foundUser.rows[0].id);
+      userData.user_id = (foundUser.rows[0].id);
     }
-    const insertQuery = createInsertQuery("db_user", queryData);
+    // NEW USER -->> create entry in user_db table for logged in google user, use fake password
+    else {
+      const queryData = {
+        f_name: userData.first_name,
+        l_name: userData.last_name,
+        email: userData.email,
+        password_hash: "google user, no pass required",
+      }
+      const insertQuery = createInsertQuery("db_user", queryData);
 
-    pool.query(insertQuery, (error, results) => {
-      if (error) {
-        console.log(error);
-        return next(createCustomError(error, StatusCodes.BAD_REQUEST));
-      }
-      // Not sure if we can get any different but just in case -> rowCount: 1 if item is notFound, otherwise 0
-      if (results.rowCount && results.rowCount !== 1) {
-        return next(createCustomError(`Could not create user`, StatusCodes.BAD_REQUEST))
-      }
-      // If all is good, user is created 
+      pool.query(insertQuery, (error, results) => {
+        if (error) {
+          console.log(error);
+          return next(createCustomError(error, StatusCodes.BAD_REQUEST));
+        }
+        // Not sure if we can get any different but just in case -> rowCount: 1 if item is notFound, otherwise 0
+        if (results.rowCount && results.rowCount !== 1) {
+          console.log(results)
+          return next(createCustomError(`Could not create user`, StatusCodes.BAD_REQUEST))
+        }
+        // If all is good, user is created -->> get their id and attach to userData
+        console.log("NEW?", results.rows[0].id)
+        userData.user_id = (results.rows[0].id);
+
+      })
+    }
+
+    console.log(userData)
+
+    // If all is good, create JWT with user_id, email, is_contributor, is_admin
+    let jwtToken = createJWT(userData.user_id, userData.email, false, false)
+
+    res.status(StatusCodes.OK).json({
+      email: userData.email,
+      first_name: userData.f_name,
+      last_name: userData.l_name,
+      token: jwtToken
     })
+
+    // if any of this this goes wrong :-)
+  } catch (error) {
+    console.log(error)
   }
-  // User has just been created or userDoesExist was true -->> return userData to FE
-  res.status(StatusCodes.OK).json(userData);
+
+  // this function will create jwt from userId, email, is_contributor, is_admin
+  // google UserId is payload.sub in original object, false, false are for isContributor, isAdmin
+  // BUT we need the id from our own DB, not payload.sub, to maintain consistency
+
+  // let jwtToken = createJWT(payload.sub, payload.email, false, false);
+
+
+  // Check if google user exists in db_user
 }
 
 

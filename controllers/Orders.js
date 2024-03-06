@@ -60,6 +60,8 @@ const createOrder = async (req, res, next) => {
         count_items += al.amountRequested
     }
 
+    console.log("req.BODY", req.body, "\nreq.USER", req.user);
+
     const orderData = {
         total: req.body.totalFromFE,
         user_id: req.user.userId,
