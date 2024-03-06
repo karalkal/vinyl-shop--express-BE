@@ -136,7 +136,7 @@ const google = async (req, res, next) => {
     // USER EXISTS -->> attach id from data returned from query
     if (foundUser.rowCount === 1) {
       console.log("OLD?", foundUser.rows[0].id);
-      userData.user_id = (foundUser.rows[0].id);
+      userData.user_id = foundUser.rows[0].id;
     }
     // NEW USER -->> create entry in user_db table for logged in google user, use fake password
     else {
@@ -155,17 +155,17 @@ const google = async (req, res, next) => {
         }
         // Not sure if we can get any different but just in case -> rowCount: 1 if item is notFound, otherwise 0
         if (results.rowCount && results.rowCount !== 1) {
-          console.log(results)
+          console.log("wrong count returned from select", results)
           return next(createCustomError(`Could not create user`, StatusCodes.BAD_REQUEST))
         }
         // If all is good, user is created -->> get their id and attach to userData
-        console.log("NEW?", results.rows[0].id)
-        userData.user_id = (results.rows[0].id);
-
+        console.log("NEW?", results.rows[0])
+        userData.user_id = results.rows[0].id;
+        console.log("USER DATA IN:", userData);
       })
     }
 
-    console.log(userData)
+    console.log("USER DATA OUT:", userData)
 
     // If all is good, create JWT with user_id, email, is_contributor, is_admin
     let jwtToken = createJWT(userData.user_id, userData.email, false, false)
