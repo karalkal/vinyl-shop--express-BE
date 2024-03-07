@@ -120,14 +120,14 @@ const login = async (req, res, next) => {
 }
 
 const google = async (req, res, next) => {
-  const { tokens } = await oAuth2Client.getToken(req.body.code); // exchange code for tokens
-
-  /*  The tokens returned from google's api contain different user data than the one this app needs.
-      To ensure consistency with our existing db_user table
-      we are constructing a new object from it to include user's data (email and names).
-      Later we add the user_id from our db, not the google one, create jwt and send the whole thing to FE
-  */
   try {
+    const { tokens } = await oAuth2Client.getToken(req.body.code); // exchange code for tokens
+
+    /*  The tokens returned from google's api contain different user data than the one this app needs.
+        To ensure consistency with our existing db_user table
+        we are constructing a new object from it to include user's data (email and names).
+        Later we add the user_id from our db, not the google one, create jwt and send the whole thing to FE
+    */
     // from google user object construct out own user object excluding id
     const userData = await processGoogleUserData(tokens);
 
@@ -137,6 +137,7 @@ const google = async (req, res, next) => {
     if (foundUser.rowCount === 1) {
       console.log("OLD?", foundUser.rows[0].id);
       userData.user_id = foundUser.rows[0].id;
+      createTokenSendResponse(userData);
     }
     // NEW USER -->> create entry in user_db table for logged in google user, use fake password
     else {
@@ -159,16 +160,25 @@ const google = async (req, res, next) => {
           return next(createCustomError(`Could not create user`, StatusCodes.BAD_REQUEST))
         }
         // If all is good, user is created -->> get their id and attach to userData
+        // If token creation and return res are outside of if... else... block
+        // they run BEFORE the promise is resolved, hence the separate function:
         console.log("NEW?", results.rows[0])
         userData.user_id = results.rows[0].id;
         console.log("USER DATA IN:", userData);
+        createTokenSendResponse(userData);
       })
     }
 
-    console.log("USER DATA OUT:", userData)
+    // if any of this this goes wrong :-)
+  } catch (error) {
+    console.log(error);
+    return next(createCustomError(`Could not create user with google credentials`, StatusCodes.BAD_REQUEST))
+  }
 
-    // If all is good, create JWT with user_id, email, is_contributor, is_admin
-    let jwtToken = createJWT(userData.user_id, userData.email, false, false)
+  // If all is good, create JWT with user_id, email, is_contributor, is_admin
+  function createTokenSendResponse(userData) {
+    let jwtToken = createJWT(userData.user_id, userData.email, false, false);
+    console.log(userData)
 
     res.status(StatusCodes.OK).json({
       email: userData.email,
@@ -176,20 +186,7 @@ const google = async (req, res, next) => {
       last_name: userData.l_name,
       token: jwtToken
     })
-
-    // if any of this this goes wrong :-)
-  } catch (error) {
-    console.log(error)
   }
-
-  // this function will create jwt from userId, email, is_contributor, is_admin
-  // google UserId is payload.sub in original object, false, false are for isContributor, isAdmin
-  // BUT we need the id from our own DB, not payload.sub, to maintain consistency
-
-  // let jwtToken = createJWT(payload.sub, payload.email, false, false);
-
-
-  // Check if google user exists in db_user
 }
 
 
