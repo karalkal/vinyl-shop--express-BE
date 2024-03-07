@@ -118,7 +118,6 @@ const emptyCart = (req, res, next) => {
     // text = 'DELETE FROM ' + tableName + ' WHERE $1 = $2;'
 
     const deleteQuery = createDeleteQuery("cart", "empty", cartNo, userId)
-    console.log(deleteQuery)
 
     pool.query(deleteQuery, (error, results) => {
         if (error) {

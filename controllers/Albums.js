@@ -17,7 +17,6 @@ const getAllAlbums = (req, res, next) => {
 const findAlbums = (req, res, next) => {
     const searchTerm = req.query.term;
 
-    console.log(req.query)
     pool.query(`SELECT id, name, band_name, cover, release_year, colour, 
     price FROM album 
     WHERE name LIKE '%${searchTerm}%'
@@ -120,7 +119,6 @@ const updateAlbum = (req, res, next) => {
     }
 
     const updateQuery = createUpdateQuery("album", albumId, updatedAlbumData);
-    // console.log("QUERY PARAMS:\n", updateQuery)
 
     pool.query(updateQuery, (error, results) => {
         if (error) {

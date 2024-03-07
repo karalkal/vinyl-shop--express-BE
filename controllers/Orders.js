@@ -18,7 +18,6 @@ const getAllOrders = (req, res, next) => {
             return next(createCustomError(error, StatusCodes.BAD_REQUEST))
         }
         // if nothing return empty array
-        console.log(results.rows)
         res.status(StatusCodes.OK).json(results.rows)
     })
 }
@@ -151,7 +150,6 @@ const updateOrder = async (req, res, next) => {
     }
 
     const updateQuery = createUpdateQuery("purchase", orderId, updatedOrderData);
-    console.log(updateQuery)
 
     pool.query(updateQuery, (error, results) => {
         if (error) {

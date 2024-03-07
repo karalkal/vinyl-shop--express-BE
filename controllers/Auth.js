@@ -135,7 +135,6 @@ const google = async (req, res, next) => {
 
     // USER EXISTS -->> attach id from data returned from query
     if (foundUser.rowCount === 1) {
-      console.log("OLD?", foundUser.rows[0].id);
       userData.user_id = foundUser.rows[0].id;
       createTokenSendResponse(userData);
     }
@@ -162,9 +161,7 @@ const google = async (req, res, next) => {
         // If all is good, user is created -->> get their id and attach to userData
         // If token creation and return res are outside of if... else... block
         // they run BEFORE the promise is resolved, hence the separate function:
-        console.log("NEW?", results.rows[0])
         userData.user_id = results.rows[0].id;
-        console.log("USER DATA IN:", userData);
         createTokenSendResponse(userData);
       })
     }
@@ -182,8 +179,8 @@ const google = async (req, res, next) => {
 
     res.status(StatusCodes.OK).json({
       email: userData.email,
-      first_name: userData.f_name,
-      last_name: userData.l_name,
+      first_name: userData.first_name,
+      last_name: userData.last_name,
       token: jwtToken
     })
   }
