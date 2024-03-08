@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"f_name\": \"eeee\",\n\t\"l_name\": \"eeee\",\n\t\"email\": \"ee@ee.ee\",\n\t\"password\": \"eeee\",\n\t\"house_number\": 55,\n\t\"street_name\":  \"Big street\",\n\t\"city\": \"London\",\n\t\"country\": \"France\",\n\t\"is_admin\": true,\n\t\"is_contributor\": true\n}",
+							"raw": "{\n\t\"f_name\": \"dd\",\n\t\"l_name\": \"dd\",\n\t\"email\": \"dd@dd.dd\",\n\t\"password\": \"dddd\",\n\t\"house_number\": \"55\",\n\t\"street_name\":  \"Big street\",\n\t\"city\": \"London\",\n\t\"country\": \"France\",\n\t\"is_admin\": true,\n\t\"is_contributor\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -42,7 +42,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"bb@bb.bb\",\n\t\"password\": \"bbbb\"\n}",
+							"raw": "{\n\t\"email\": \"aa@aa.aa\",\n\t\"password\": \"aaaa\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -57,6 +57,33 @@
 							"path": [
 								"auth",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GOOGLE login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"4/0AeaYSHBHriKXjzecmxy7fGqxkUDfU39FiojljEw8MVqOrd64-z051W_RUeSwhOYn14jI4g\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DEV_URL}}/auth/google",
+							"host": [
+								"{{DEV_URL}}"
+							],
+							"path": [
+								"auth",
+								"google"
 							]
 						}
 					},
@@ -110,7 +137,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzE3Mzc5OCwiZXhwIjoxNzAzMjYwMTk4fQ.gnkEJdnWymTGPDKkl22Fl-X7ICIyYwHGqPcQVb8gVwY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MjMsImVtYWlsIjoiYWFAYWEuYWEiLCJpc19jb250cmlidXRvciI6dHJ1ZSwiaXNfYWRtaW4iOnRydWV9LCJpYXQiOjE3MDgwMjM0MzAsImV4cCI6MTcwODEwOTgzMH0.v29FQtkxS_hnGY8UP1_BAeARChih6QJCCI0aJcSHjTk",
 									"type": "string"
 								}
 							]
@@ -119,7 +146,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"name\": \"to delete\",\n        \"band_name\": \"The Pogues\",\n        \"cover\": \"to delete\",\n        \"release_year\": 1991,\n        \"colour\": \"black\",\n        \"price\": 22,\n        \"quantity\": 1,\n        \"label_name\": \"Warner Music Group\"\n}",
+							"raw": "{\n        \"name\": \"long name with white spaces long name with white spaces long name with white spaces \",\n        \"band_name\": \"Long Band Name With White Space Long Band Name With White Space Long Band Name With White Space \",\n        \"cover\": \"to delete\",\n        \"release_year\": 0,\n        \"colour\": \"red\",\n        \"price\": 0,\n        \"quantity\": 0,\n        \"label_name\": \"Warner Music Group\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -366,7 +393,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMjc3ODg2NywiZXhwIjoxNzAyODY1MjY3fQ.kxRxeBVbuRuJtW79gAe0rG35RU9Y5EAjOfXDdMxHCf0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MiwiZW1haWwiOiJiYkBiYi5iYiIsImlzX2NvbnRyaWJ1dG9yIjpmYWxzZSwiaXNfYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzA0NDg5ODMzLCJleHAiOjE3MDQ1NzYyMzN9.kcvgGy_lg_WjZbaDW4InRtsjlllf0eK2MzbGgQYov1M",
 									"type": "string"
 								}
 							]
@@ -768,27 +795,38 @@
 			"item": [
 				{
 					"name": "GET all USERS",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzYzNDM4NiwiZXhwIjoxNzAzNzIwNzg2fQ.t4_e8FYElH_ZNRxmZN-fDUDdetSoH0ittFrc0_KnTvY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MjMsImVtYWlsIjoiYWFAYWEuYWEiLCJpc19jb250cmlidXRvciI6dHJ1ZSwiaXNfYWRtaW4iOnRydWV9LCJpYXQiOjE3MDgxMjU2MjYsImV4cCI6MTcwODIxMjAyNn0.NY6RBJCrCU7_iZQXRQgAfIg-gqegoN6Z-_aD9aNdKaM",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{URL}}/users/",
+							"raw": "{{URL}}/users",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
-								"users",
-								""
+								"users"
 							]
 						}
 					},
@@ -926,149 +964,6 @@
 			]
 		},
 		{
-			"name": "carts",
-			"item": [
-				{
-					"name": "GET cart by USER ID",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzYzNDM4NiwiZXhwIjoxNzAzNzIwNzg2fQ.t4_e8FYElH_ZNRxmZN-fDUDdetSoH0ittFrc0_KnTvY",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{URL}}/cart/1",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"cart",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ADD item to cart",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzQzNDg0NSwiZXhwIjoxNzAzNTIxMjQ1fQ.6VNdMx179xcuSp1QG_YtfMs0frzzoZZoGG6tdSI-ZKg",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"cart_no\": 2, \n    \"album_id\": 13,\n    \"user_id\": 6\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{URL}}/cart/add",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"cart",
-								"add"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "REMOVE item from cart",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6NiwiZW1haWwiOiJkZEBkZC5kZCIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6ZmFsc2V9LCJpYXQiOjE3MDM0MzkzMjksImV4cCI6MTcwMzUyNTcyOX0.zRb1KQp8fzqzbsEK3j0U0JIpi5-RMQ1E8YptY971UCg",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"id\": 53, \n    \"user_id\": 6\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{URL}}/cart/remove",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"cart",
-								"remove"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "EMPTY cart BY cart_no and user_id",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzQzNDg0NSwiZXhwIjoxNzAzNTIxMjQ1fQ.6VNdMx179xcuSp1QG_YtfMs0frzzoZZoGG6tdSI-ZKg",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"cart_no\": 1, \n    \"user_id\": 6\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{URL}}/cart",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"cart"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "orders",
 			"item": [
 				{
@@ -1079,7 +974,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzYzNDM4NiwiZXhwIjoxNzAzNzIwNzg2fQ.t4_e8FYElH_ZNRxmZN-fDUDdetSoH0ittFrc0_KnTvY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MjMsImVtYWlsIjoiYWFAYWEuYWEiLCJpc19jb250cmlidXRvciI6dHJ1ZSwiaXNfYWRtaW4iOnRydWV9LCJpYXQiOjE3MDg5MDAwNTIsImV4cCI6MTcwODk4NjQ1Mn0.zoIIbkjHJz8wgzhrBTyfl2kS6747_mVQM7FCtP7yRYM",
 									"type": "string"
 								}
 							]
@@ -1136,7 +1031,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MSwiZW1haWwiOiJhYUBhYS5hYSIsImlzX2NvbnRyaWJ1dG9yIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0sImlhdCI6MTcwMzYzNDM4NiwiZXhwIjoxNzAzNzIwNzg2fQ.t4_e8FYElH_ZNRxmZN-fDUDdetSoH0ittFrc0_KnTvY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6MjMsImVtYWlsIjoiYWFAYWEuYWEiLCJpc19jb250cmlidXRvciI6dHJ1ZSwiaXNfYWRtaW4iOnRydWV9LCJpYXQiOjE3MDg3MzYxNTcsImV4cCI6MTcwODgyMjU1N30.y2IbASiUcKu19a9ZQXj5uozKycqY5WNRjKAEkubzALI",
 									"type": "string"
 								}
 							]
@@ -1145,7 +1040,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"cart_no\": 2,\n    \"user_id\": 1\n}",
+							"raw": "{\n    \"paymentSuccessful\":true,\n    \"albumsOrdered\":\n        [\n        {\"id\":70,\"amountRequested\":1,\"name\":\"Abducted\",\"price\":0},\n        {\"id\":1,\"amountRequested\":3,\"name\":\"Monolithe Iii\",\"price\":48.39}\n        ],\n    \"totalFromFE\":145.17000000000002,\n    \"userEmail\":\"dd@dd.dd\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
