@@ -77,9 +77,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{DEV_URL}}/auth/google",
+							"raw": "{{URL}}/auth/google",
 							"host": [
-								"{{DEV_URL}}"
+								"{{URL}}"
 							],
 							"path": [
 								"auth",

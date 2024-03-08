@@ -51,6 +51,9 @@
 1. import json operated by postman
 2. go through settings, e.g. remove authentication from unprotected routes
 3. export as yaml v3
+4. edit file in swagger editor
+5. install yamljs and swagger-ui-express
+6. require both, load .yaml document, serve it at required url
 
 ---
 
