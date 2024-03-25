@@ -93,6 +93,8 @@ pool.query('SELECT id, f_name, l_name, city, country FROM db_user ORDER BY id AS
 
 - Google login:  
 The tokens returned from google's api contain different user data than the one this app needs. To ensure consistency with our existing db_user table we are constructing a new object from it to include user's data (email and names). Later we add the user_id from our db, not the google one, create jwt and send the whole thing to FE. The insert query when creating user runs asynchronously. As a result if the data is sent outside of the if... else... block the app will send data to the FE without the user_id, then errors will appear if they try to place an order, hence the repetition of code for existing and newly created users.
+- Admin privileges:  
+The BE will return a data object to the FE which will contain user data, such as names, email and **is_admin** and a **js token**. The `is_admin` property will allow the user to access protected routes but only after our BE has checked the token. In other words, the `is_admin` property is only preliminary check at the FE - if `false` the user will not be able to access the protected routes at all. But if anyone changes it manually to `true` and accesses the protected routes, they will still have to pass our adminAuthorization to access protected data.
 
 ---
 

@@ -114,7 +114,8 @@ const login = async (req, res, next) => {
       email: results.rows[0].email,
       first_name: results.rows[0].f_name,
       last_name: results.rows[0].l_name,
-      token: jwtToken
+      token: jwtToken,
+      is_admin: results.rows[0].is_admin
     })
   })
 }
