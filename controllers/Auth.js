@@ -1,4 +1,4 @@
-const { StatusCodes, OK } = require('http-status-codes');
+const { StatusCodes } = require('http-status-codes');
 const bcrypt = require('bcryptjs');
 const { OAuth2Client } = require('google-auth-library');
 
@@ -186,7 +186,6 @@ const google = async (req, res, next) => {
     })
   }
 }
-
 
 module.exports = {
   register,

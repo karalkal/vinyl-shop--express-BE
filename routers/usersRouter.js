@@ -9,7 +9,6 @@ const usersRouter = express.Router({ mergeParams: true });
 
 // only logged in users can see profiles (restricted data - no password, email, address etc)
 usersRouter.get("/", userAuthentication, getAllUsers);
-usersRouter.get("/admin", adminAuthorization, getAllUsers);
 
 // admins can create users on the fly, normal users use register instead
 usersRouter.post("/", adminAuthorization, createUser);

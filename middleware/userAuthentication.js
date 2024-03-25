@@ -5,7 +5,9 @@ const { createCustomError } = require('../errors/custom-error')
 
 const userAuthentication = async (req, res, next) => {
   // check header
-  const authHeader = req.headers.authorization
+  const authHeader = req.headers.authorization;
+  console.log("header", authHeader)
+
   if (!authHeader || !authHeader.startsWith('Bearer')) {
     return next(createCustomError(`Invalid or missing token`, StatusCodes.UNAUTHORIZED))
   }
