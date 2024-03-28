@@ -10,7 +10,6 @@ authRouter.post('/login', login)
 authRouter.post('/google', google)
 authRouter.get('/admin', adminAuthorization, async (req, res, next) => {
     const isAdmin = req.user.is_admin
-    console.log("HERE", isAdmin)
     res.status(StatusCodes.OK).send(isAdmin)
 })
 
