@@ -1,6 +1,5 @@
 const express = require('express');
 const { getAllGenres, getGenreById, createGenre, deleteGenre, updateGenre } = require('../controllers/Genres')
-const userAuthentication = require('../middleware/userAuthentication');
 const adminAuthorization = require('../middleware/adminAuthorization');
 
 // you need to set mergeParams: true on the router,

@@ -1,6 +1,5 @@
 const express = require('express');
 const { getAllAlbums, findAlbums, getAlbumById, createAlbum, deleteAlbum, updateAlbum } = require('../controllers/Albums');
-const userAuthentication = require('../middleware/userAuthentication');
 const adminAuthorization = require('../middleware/adminAuthorization');
 
 // you need to set mergeParams: true on the router,
