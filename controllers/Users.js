@@ -24,7 +24,8 @@ const getUserById = (req, res, next) => {
         return next(createCustomError('Only logged in user and admins can view this profile', StatusCodes.BAD_REQUEST));
     }
 
-    pool.query(`SELECT * FROM db_user WHERE db_user.id = ${userId}`, (error, results) => {
+    pool.query(`SELECT id, f_name, l_name, email, house_number, street_name, city, country, is_admin, 
+                is_contributor FROM db_user WHERE db_user.id = ${userId}`, (error, results) => {        // all except password hash
         if (error) {
             return next(createCustomError(error, StatusCodes.BAD_REQUEST))
         }
@@ -111,8 +112,9 @@ const updateUser = async (req, res, next) => {
     }
     const updatedUserData = req.body;
     // Overwrite is_admin: make sure users cannot update themselves with is_admin: true. These can be edited directly from DB only!
-    updatedUserData.is_admin = req.user.is_admin
-    updatedUserData.is_contributor = req.user.is_contributor
+    updatedUserData.is_admin = req.user.is_admin;
+    updatedUserData.is_contributor = req.user.is_contributor;
+    console.log(updatedUserData);
 
     const undefinedProperty = verifyNonNullableFields("db_user", updatedUserData);
     if (undefinedProperty) {
