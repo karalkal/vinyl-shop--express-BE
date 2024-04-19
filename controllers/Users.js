@@ -36,7 +36,7 @@ const getUserById = (req, res, next) => {
     })
 }
 const deleteUser = (req, res, next) => {
-    const { userId } = req.params
+    const { userId } = req.params;
     // middleware creates req.user
     // only admins and the user themselves can access this route
     if (Number(userId) !== req.user.userId && !req.user.is_admin) {
