@@ -133,13 +133,14 @@ function createUpdateQuery(tableName, itemId, updatedData) {
         values = [updatedData.name]
     }
     if (tableName === "db_user") {
+        // console.log("TABLE:", tableName, "DATA:", updatedData, "ID:", itemId)
         text = 'UPDATE ' + tableName + ' SET ' + 'f_name = $1,' + 'l_name = $2,' + 'email = $3,'
-            + 'password_hash = $4,' + 'house_number = $5,' + 'street_name = $6,' + 'city = $7,'
-            + 'country = $8,' + 'is_admin = $9,' + 'is_contributor = $10'
+            + 'house_number = $4,' + 'street_name = $5,' + 'city = $6,'
+            + 'country = $7,' + 'is_admin = $8,' + 'is_contributor = $9'
             + ' WHERE id = ' + itemId + ' RETURNING * '
 
-        values = [      // password MUST be received as hashed value
-            updatedData.f_name, updatedData.l_name, updatedData.email, updatedData.password_hash, updatedData.house_number,
+        values = [
+            updatedData.f_name, updatedData.l_name, updatedData.email, updatedData.house_number,
             updatedData.street_name, updatedData.city, updatedData.country, updatedData.is_admin, updatedData.is_contributor
         ]
     }

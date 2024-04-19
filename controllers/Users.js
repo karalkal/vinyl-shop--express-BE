@@ -35,54 +35,6 @@ const getUserById = (req, res, next) => {
         res.status(StatusCodes.OK).json(results.rows[0])
     })
 }
-
-// essentially identical to register in Auth, only different res.json and will have different access rights
-const createUser = async (req, res, next) => {
-    const userData = req.body
-    // Validations
-    const undefinedProperty = verifyNonNullableFields("db_user", userData);
-    if (undefinedProperty) {
-        return next(createCustomError(`Cannot create: essential data missing - ${undefinedProperty}`, StatusCodes.BAD_REQUEST));
-    }
-
-    const passTooShort = stringLengthValidator(userData.password, 4, 35)  // min, max
-    if (passTooShort) {
-        return next(createCustomError(`Password must be between 4 and 35 chars`, StatusCodes.BAD_REQUEST));
-    }
-    const f_nameTooShort = stringLengthValidator(userData.f_name, 1, 44)  // min, max
-    if (f_nameTooShort) {
-        return next(createCustomError(`First Name must be between 3 and 44 chars`, StatusCodes.BAD_REQUEST));
-    }
-    const l_nameTooShort = stringLengthValidator(userData.l_name, 1, 44)  // min, max
-    if (l_nameTooShort) {
-        return next(createCustomError(`Last Name must be between 3 and 44 chars`, StatusCodes.BAD_REQUEST));
-    }
-    const emailIsValid = emailValidator(userData.email)    // regex checks for VALID
-    if (!emailIsValid) {
-        return next(createCustomError(`Invalid email format`, StatusCodes.BAD_REQUEST));
-    }
-
-    // Encrypt password
-    const salt = await bcrypt.genSalt(10)
-    userData.password_hash = await bcrypt.hash(userData.password, salt)
-    delete userData.password    // just in case
-
-    // Create the user and return jwt if successful, error if not
-    const insertQuery = createInsertQuery("db_user", userData)
-
-    pool.query(insertQuery, (error, results) => {
-        if (error) {
-            return next(createCustomError(error, StatusCodes.BAD_REQUEST))
-        }
-        // Not sure if we can get any different but just in case -> rowCount: 1 if item is notFound, otherwise 0
-        if (results.rowCount && results.rowCount !== 1) {
-            return next(createCustomError(`Could not create user`, StatusCodes.BAD_REQUEST))
-        }
-        // If all is good
-        res.status(StatusCodes.CREATED).json(results.rows)
-    })
-}
-
 const deleteUser = (req, res, next) => {
     const { userId } = req.params
     // middleware creates req.user
@@ -104,44 +56,21 @@ const deleteUser = (req, res, next) => {
     })
 }
 const updateUser = async (req, res, next) => {
-    const { userId } = req.params
+    const { userId } = req.params;
     // middleware creates req.user
     // only admins and the user themselves can access this route
     if (Number(userId) !== req.user.userId && !req.user.is_admin) {
         return next(createCustomError('Only logged in user and admins can update this profile', StatusCodes.BAD_REQUEST));
     }
+
     const updatedUserData = req.body;
-    // Overwrite is_admin: make sure users cannot update themselves with is_admin: true. These can be edited directly from DB only!
-    updatedUserData.is_admin = req.user.is_admin;
-    updatedUserData.is_contributor = req.user.is_contributor;
-    console.log(updatedUserData);
-
-    const undefinedProperty = verifyNonNullableFields("db_user", updatedUserData);
-    if (undefinedProperty) {
-        return next(createCustomError(`Cannot update: essential data missing - ${undefinedProperty}`, StatusCodes.BAD_REQUEST));
-    }
-    // WILL BE GOOD TO ABSTRACT THIS, I HAVE IT IN REGISTER TOO
-    const passTooShort = stringLengthValidator(updatedUserData.password, 4, 35)  // min, max
-    if (passTooShort) {
-        return next(createCustomError(`Password must be between 4 and 35 chars`, StatusCodes.BAD_REQUEST));
-    }
-    const f_nameTooShort = stringLengthValidator(updatedUserData.f_name, 3, 44)  // min, max
-    if (f_nameTooShort) {
-        return next(createCustomError(`First Name must be between 3 and 44 chars`, StatusCodes.BAD_REQUEST));
-    }
-    const l_nameTooShort = stringLengthValidator(updatedUserData.l_name, 3, 44)  // min, max
-    if (l_nameTooShort) {
-        return next(createCustomError(`Last Name must be between 3 and 44 chars`, StatusCodes.BAD_REQUEST));
-    }
-    const emailIsValid = emailValidator(updatedUserData.email)    // regex checks for VALID
-    if (!emailIsValid) {
-        return next(createCustomError(`Invalid email format`, StatusCodes.BAD_REQUEST));
-    }
-
-    // Encrypt password
-    const salt = await bcrypt.genSalt(10)
-    updatedUserData.password_hash = await bcrypt.hash(updatedUserData.password, salt)
-    delete updatedUserData.password    // just in case
+    // When implementing user updating their own profiles functionality,  
+    // ensure users cannot update themselves with is_admin: true. 
+    // These can be edited directly from DB only!
+    // Overwrite is_admin like below
+    // updatedUserData.is_admin = req.user.is_admin;
+    // updatedUserData.is_contributor = req.user.is_contributor;
+    // console.log("updatedUserData", updatedUserData)
 
     const updateQuery = createUpdateQuery("db_user", userId, updatedUserData);
 
@@ -157,4 +86,4 @@ const updateUser = async (req, res, next) => {
 }
 
 
-module.exports = { getAllUsers, getUserById, createUser, deleteUser, updateUser }
+module.exports = { getAllUsers, getUserById, deleteUser, updateUser }

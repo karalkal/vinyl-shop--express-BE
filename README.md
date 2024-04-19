@@ -98,7 +98,8 @@ The BE will return a data object to the FE which will contain user data, such as
 
 ---
 
-### *Possible issues (could be resolved at FE level)*
+### *Possible issues and TODOs (could be resolved at FE level)*
 
 - (fixed) order could be created with non-existing cart_no, will be empty.
 - (fixed) can also post order to an user who is NOT related to cart, e.g. user1 adds to cart_no 1 but then post order with this cart_no to user2. User 2 will then have empty array of ordered items but price will still be updated.
+- now admins only can view, update, delete users, need to enable users to do this with their own profiles.
