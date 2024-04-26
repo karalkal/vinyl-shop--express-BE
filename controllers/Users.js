@@ -71,7 +71,8 @@ const updateUser = async (req, res, next) => {
     // updatedUserData.is_admin = req.user.is_admin;
     // updatedUserData.is_contributor = req.user.is_contributor;
     // console.log("updatedUserData", updatedUserData)
-
+    updatedUserData.is_admin = false;
+    updatedUserData.is_contributor = false;
     const updateQuery = createUpdateQuery("db_user", userId, updatedUserData);
 
     pool.query(updateQuery, (error, results) => {
