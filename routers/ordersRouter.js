@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllOrders, getOrdersByUserAndOrderId, createOrder, deleteOrder, updateOrder } = require('../controllers/Orders');
+const { getAllOrders, getOrdersByUserAndOrderId, createOrder, createAlbumOrderEntry, deleteOrder, updateOrder } = require('../controllers/Orders');
 const userAuthentication = require('../middleware/userAuthentication');
 const adminAuthorization = require('../middleware/adminAuthorization');
 
@@ -12,7 +12,7 @@ ordersRouter.get("/", userAuthentication, getAllOrders);
 // url/order/id/id - users can view their orders, admins too
 ordersRouter.get("/:userId/:orderId", userAuthentication, getOrdersByUserAndOrderId);
 // this is the route where an order is placed
-ordersRouter.post("/", userAuthentication, createOrder);
+ordersRouter.post("/", userAuthentication, createOrder, createAlbumOrderEntry);
 // admins only can remove orders
 ordersRouter.delete("/:orderId", adminAuthorization, deleteOrder);
 // admin access only - allows changes to status to shipped, completed etc.

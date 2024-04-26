@@ -71,6 +71,10 @@ VALUES
 ('The Raging Wrath Of The Easter Bunny Demo', 'https://upload.wikimedia.org/wikipedia/en/b/b3/The_Raging_Wrath_of_the_Easter_Bunny_album_cover.jpg',
  'The Raging Wrath of the Easter Bunny Demo is the fourth full length studio album by American experimental rock band Mr. Bungle, released on October 30, 2020, through Ipecac Recordings. It serves as their first album after a 20-year hiatus and subsequent reunion in February that year, while also marking their first release through Ipecac, which was co-founded by lead vocalist Mike Patton.',
  2020, 'red', 11, 'Mr. Bungle', 'Ipecac Recordings', 26);
+ 
+ -- allow users to pay top dollar
+ ALTER Table purchase ALTER COLUMN total TYPE NUMERIC(10,2);
+
 
 
 

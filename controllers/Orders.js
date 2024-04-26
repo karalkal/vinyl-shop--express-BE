@@ -22,7 +22,7 @@ const getAllOrders = (req, res, next) => {
     })
 }
 
-
+// NOT IMPLEMENTED - SKIP 
 const getOrdersByUserAndOrderId = (req, res, next) => {
     // middleware creates req.user
     const { userId, orderId } = req.params
@@ -53,16 +53,15 @@ const createOrder = async (req, res, next) => {
         return next(createCustomError('You cannot create orders for other users, obviously', StatusCodes.BAD_REQUEST));
     }
     // Don't forget - user can order numerous copies of same item
-    // console.log(JSON.stringify(req.body))
+    // albumsOrdered contains objects with album data AND AMOUNT REQUESTED for each item
     let count_items = 0;
     for (let al of req.body.albumsOrdered) {
         count_items += al.amountRequested
     }
 
-    console.log("req.BODY", req.body, "\nreq.USER", req.user);
-
+    // console.log("req.BODY", req.body, "\nreq.USER", req.user);
     const orderData = {
-        total: req.body.totalFromFE,
+        total: Number((req.body.totalFromFE).toFixed(2)),
         user_id: req.user.userId,
         count_items,
     }
@@ -72,50 +71,50 @@ const createOrder = async (req, res, next) => {
         return next(createCustomError(`Cannot create: essential data missing - ${undefinedProperty}`, StatusCodes.BAD_REQUEST));
     }
 
-    console.log(orderData);
+    // Create entry in purchase table, attach returned purchaseId to req, next(), next middleware will insert in intermediary table AlbumOrder
     const insertQuery = createInsertQuery("purchase", orderData);
-
     pool.query(insertQuery, (error, results) => {
         if (error) {
+            console.log(error)
             return next(createCustomError(error, StatusCodes.BAD_REQUEST))
         }
         // Not sure if we can get any different but just in case -> rowCount: 1 if item is notFound, otherwise 0
         if (results.rowCount && results.rowCount !== 1) {
             return next(createCustomError(`Could not create purchase`, StatusCodes.BAD_REQUEST))
         }
-        // If all is good, try to create intermediary table entry first and if successful, then return ok
-        const purchaseId = results.rows[0].id
-        createAlbumOrderEntry(purchaseId, req.body.albumsOrdered, req, res, next)
-
-        res.status(StatusCodes.CREATED).json(results.rows)
+        req.body.purchaseId = results.rows[0].id;      // record created successfully -->> get purchaseId
+        // console.log("first query ran", req.body);
+        next();
     })
 }
 
-// This function will be called once a new order/purchase has been created
-async function createAlbumOrderEntry(purchaseId, albums, req, res, next) {
-    for (let album of albums) {
-        let copiesOrdered = Number(album.amountRequested);
-        let albumId = album.id;
-        // can actually create orderData here as inner loop just deals with copiesOrdered 
-        const orderData = { purchaseId, albumId }
+/** This function will be called once a new order/purchase has been created.
+    It will create records in intermediary table AlbumOrder
+    for each COPY of album ordered  */
+const createAlbumOrderEntry = async (req, res, next) => {
+    const { purchaseId, albumsOrdered } = req.body;
+    for (let album of albumsOrdered) {
+        // create orderData obj to send to query creator
+        const orderData = { purchaseId, albumId: album.id };
 
-        // for each album copy ordered separate entry in the table
-        for (let copyNo = 1; copyNo <= copiesOrdered; copyNo++) {
-
+        // More than one copy of each album could be ordered (see amountRequested), hence inner loop
+        // for each album copy ordered create separate entry in the table
+        for (let copyNo = 1; copyNo <= album.amountRequested; copyNo++) {
             const insertQuery = createInsertQuery("album_purchase", orderData);
+            // console.log("\n++++\nalbumId:", album.id, "\ncopiesOrdered:", album.amountRequested, "\ncopyNo.:", copyNo, "\n++++\n")
+            // console.log("------\nfor purchase:", purchaseId, "\ninsertQuery receives:", orderData)
 
-            pool.query(insertQuery, (error, results) => {
-                if (error) {
-                    return next(createCustomError(error, StatusCodes.BAD_REQUEST))
-                }
-                if (results.rowCount && results.rowCount !== 1) {
-                    return next(createCustomError(`Could not write in album_purchase table`, StatusCodes.BAD_REQUEST))
-                }
-                return
-                // res.status(StatusCodes.CREATED).json(results.rows)
-            })
+            try {
+                await pool.query(insertQuery);      // await is key here!
+            } catch (error) {
+                console.log(error)
+                return next(createCustomError(error, StatusCodes.BAD_REQUEST))
+            }
         }
+
     }
+    // if all is good
+    res.status(StatusCodes.CREATED).json(req.body)
 }
 
 const deleteOrder = (req, res, next) => {
@@ -163,4 +162,4 @@ const updateOrder = async (req, res, next) => {
 }
 
 
-module.exports = { getAllOrders, getOrdersByUserAndOrderId, createOrder, deleteOrder, updateOrder }
+module.exports = { getAllOrders, getOrdersByUserAndOrderId, createOrder, createAlbumOrderEntry, deleteOrder, updateOrder }
