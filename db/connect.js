@@ -1,18 +1,19 @@
 const Pool = require('pg').Pool
 require('dotenv').config()
 
-const ELEPHANT_URL = process.env.ELEPHANT_URL
-const ELEPHANT_PASS = process.env.ELEPHANT_PASS
-const ELEPHANT_USER = process.env.ELEPHANT_USER
-const ELEPHANT_DB = process.env.ELEPHANT_DB
+const DB_HOST = process.env.POSTGRESQL_ADDON_HOST
+const DB_PASSWORD = process.env.POSTGRESQL_ADDON_PASSWORD
+const DB_USER = process.env.POSTGRESQL_ADDON_USER
+const DB_NAME = process.env.POSTGRESQL_ADDON_DB
+const DB_PORT = process.env.POSTGRESQL_ADDON_PORT
 
 
 const pool = new Pool({
-    user: ELEPHANT_USER,
-    host: ELEPHANT_URL,
-    database: ELEPHANT_DB,
-    password: ELEPHANT_PASS,
-    port: 5432,
+    user: DB_USER,
+    host: DB_HOST,
+    database: DB_NAME,
+    password: DB_PASSWORD,
+    port: DB_PORT,
 })
 
 // NB runs at port 5433 locally
