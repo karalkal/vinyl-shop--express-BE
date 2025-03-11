@@ -12,8 +12,8 @@ INSERT into cart (cart_no, album_id, user_id) 	values (1, 1, 1);
 -- he loves it, re-orderes it
 INSERT into cart (cart_no, album_id, user_id) 	values (1, 1, 1);
 -- and orders others
-INSERT into cart (cart_no, album_id, user_id) 	values (1, 9, 1);
-INSERT into cart (cart_no, album_id, user_id) 	values (1, 1, 1);
+INSERT into cart (cart_no, album_id, user_id) 	values (1, 19, 1);
+INSERT into cart (cart_no, album_id, user_id) 	values (1, 7, 1);
 
 drop table if exists purchase;
 

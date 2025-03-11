@@ -1,7 +1,7 @@
 -- redundant as cart will be stored locally on FE only
 drop table if exists cart;
 
--- check contraints of purchase
+-- check constraints of purchase
 SELECT con.*
        FROM pg_catalog.pg_constraint con
             INNER JOIN pg_catalog.pg_class rel

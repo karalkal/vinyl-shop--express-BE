@@ -29,6 +29,11 @@ UPDATE album
 SET price = 44.44
 WHERE id='1';
 
+-- Updating NULL values in the 'price' column with 22
+UPDATE album
+SET price = 22
+WHERE price IS NULL;
+
 -- price will be NOT NULL
 ALTER TABLE album ALTER COLUMN price SET NOT NULL;
 
@@ -67,9 +72,9 @@ INSERT into db_user(
 	is_admin, is_contributor
 )
 	VALUES(
-		'aaaa', 'aaaa', 'aa@aa.aa', 'aaaa',		
+		'bb', 'bb', 'bb@bb.bb', 'bbbb',		
 		'4', 'big street', 'London', 'France',
-		false, false					)
+		false, false)
 
 
 
